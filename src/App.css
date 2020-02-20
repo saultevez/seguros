@@ -1,38 +1,150 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+#cost-calculator {
+  margin: 0;
+  background: #592C88;
+  font-family: "freight-sans-pro-n4","freight-sans-pro",sans-serif;
   color: white;
+  border-radius: 3px;
+  max-width: 330px;
 }
-
-.App-link {
-  color: #61dafb;
+.section-one {
+  padding: 10px 0px;
+  float: none;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.title-container {
+  padding: 10px 40px 0px 40px;
+}
+.input-container {
+  padding: 10px 40px;
+  float: none;
+  width: auto;
+  position: static;
+}
+.secondary-container {
+  background: #4b2574;
+}
+#cost-calculator h2 {
+  margin: 0px 0px 10px 0px;
+  font-weight: 600;
+  font-size: 30px;
+  padding-top: 10px;
+  color: white;
+  font-family: "freight-sans-pro-n4","freight-sans-pro",sans-serif;
+}
+#cost-calculator hr {
+  border: none;
+  border-top: 1px solid #aa76e0;
+  margin: 0;
+}
+#cost-calculator h3 {
+  margin: 0px;
+  font-weight: 600;
+  font-family: "freight-sans-pro-n4","freight-sans-pro",sans-serif;
+  color: white;
+  font-size: 1.17em;
+  float: none;
+  line-height: normal;
+}
+#cost-calculator .input-group, #cost-calculator .input-group-hours {
+  margin: 3px 0px;
+  display: inline-block;
+  margin-right: 14px;
+  float: none;
+  width: auto;
+}
+#cost-calculator .no-right-margin {
+  margin-right: 0px;
+}
+#cost-calculator [type="radio"]:checked, #cost-calculator [type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+#cost-calculator [type="radio"]:checked + label, #cost-calculator [type="radio"]:not(:checked) + label
+{
+    position: relative;
+    padding-left: 24px;
+    cursor: pointer;
+    line-height: 18px;
+    display: inline-block;
+    font-weight: 500;
+    font-size: 100%;
+    color: white;
+}
+#cost-calculator [type="radio"]:checked + label:before, #cost-calculator [type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 16px;
+    height: 16px;
+    border: 1px solid white;
+    border-radius: 100%;
+    background: white;
+}
+#cost-calculator [type="radio"]:checked + label:after, #cost-calculator [type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: #592C88;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+#cost-calculator [type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+#cost-calculator [type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+.total-container {
+  background: #C1A875;
+  padding: 15px 40px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+#cost-calculator .total-container h3 {
+  color: #343434;
+}
+#cost-calculator .total-container .total-cost {
+  font-size: 34px;
+  color: #343434;
+  margin: 0px;
+  font-family: "freight-sans-pro-n4","freight-sans-pro",sans-serif;
+  font-weight: 600;
+  line-height: 45px;
+}
+#cost-calculator .number-font {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+}
+#cost-calculator .total-cost .total-font {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  margin-left: 2px;
+}
+.no-float {
+  float:none;
+  box-sizing: content-box;
+}
+@media (max-width: 370px) {
+  .title-container {
+    padding: 10px 20px 0px 20px;
   }
-  to {
-    transform: rotate(360deg);
+  #cost-calculator .input-group {
+    width: 100%;
+  }
+  .input-container {
+    padding: 10px 20px;
+  }
+  .total-container {
+    padding: 15px 20px;
   }
 }
