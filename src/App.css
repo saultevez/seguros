@@ -1,6 +1,6 @@
 #cost-calculator {
   margin: 0;
-  background: #592C88;
+  background: #66288B;
   font-family: "freight-sans-pro-n4","freight-sans-pro",sans-serif;
   color: white;
   border-radius: 3px;
@@ -20,7 +20,7 @@
   position: static;
 }
 .secondary-container {
-  background: #4b2574;
+  background: #582277;
 }
 #cost-calculator h2 {
   margin: 0px 0px 10px 0px;
@@ -69,6 +69,11 @@
     font-size: 100%;
     color: white;
 }
+#cost-calculator [type="radio"]:focus + label{
+  outline: 1px dotted #212121;
+  outline: 5px auto -webkit-focus-ring-color;
+}
+
 #cost-calculator [type="radio"]:checked + label:before, #cost-calculator [type="radio"]:not(:checked) + label:before {
     content: '';
     position: absolute;
@@ -84,7 +89,7 @@
     content: '';
     width: 10px;
     height: 10px;
-    background: #592C88;
+    background: #66288B;
     position: absolute;
     top: 4px;
     left: 4px;
