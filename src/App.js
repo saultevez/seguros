@@ -18,100 +18,115 @@ const costs = {
 };
 
 function Hours(props) {
-  const show = props.credit === "part-time";
   const level = props.level;
   const change = props.change;
+  const credit = props.credit
+  const show = credit !== "" && level !== "";
   return (
-    <Transition items={show} from={{height:0, overflow: "hidden" }} enter={{height: 72}} leave={{height:0}}>
-      {show => show && (props => <div className="no-float" style={props}><Hoursdiv level={level} change={change}/></div>)}
+    <Transition items={show} from={{height:0, overflow: "hidden"}} enter={{height: 72}} leave={{height:0}}>
+      {show => show && (props => <div className="no-float" style={props}><Hourscontainer level={level} change={change} credit={credit}/></div>)}
     </Transition>
   );
 }
 
-function Hoursdiv(props) {
+function Hourscontainer(props) {
   const undergradCheck = props.level === "undergrad";
+  const showCredit = props.credit === "part-time";
   return (
-    <div className="input-container secondary-container" role="group" aria-labelledby="hours">
+    <div className="input-container secondary-container hours-container" role="group" aria-labelledby="hours">
       <h3 id="hours">Hours</h3>
-      <div className="input-group-hours">
-        <input type="radio" id="three-hours" value={undergradCheck ? "1" : "2"} name="hours" onChange={props.change} defaultChecked></input>
-        <label htmlFor="three-hours" className="number-font">3</label>
-      </div>
-      <div className="input-group-hours">
-        <input type="radio" id="six-hours" value={undergradCheck ? "2" : "3"} name="hours" onChange={props.change}></input>
-        <label htmlFor="six-hours" className="number-font">6</label>
-      </div>
-      {undergradCheck &&
-      <div className="input-group-hours">
-        <input type="radio" id="nine-hours" value="3" name="hours" onChange={props.change}></input>
-        <label htmlFor="nine-hours" className="number-font">9</label>
-      </div>
-      }
+        {showCredit ? (
+          <div>
+            <div className="input-group-hours">
+              <input type="radio" id="three-hours" value={undergradCheck ? "1" : "2"} name="hours" onChange={props.change} defaultChecked></input>
+              <label htmlFor="three-hours" className="number-font">3</label>
+            </div>
+            <div className="input-group-hours">
+              <input type="radio" id="six-hours" value={undergradCheck ? "2" : "3"} name="hours" onChange={props.change}></input>
+              <label htmlFor="six-hours" className="number-font">6</label>
+            </div>
+            {undergradCheck &&
+              <div className="input-group-hours">
+                <input type="radio" id="nine-hours" value="3" name="hours" onChange={props.change}></input>
+                <label htmlFor="nine-hours" className="number-font">9</label>
+              </div>
+            }
+            </div>
+            ) : (
+            <div className="input-group-hours">
+              <input type="radio" id="full-time-hours" name="hours" defaultChecked></input>
+              <label htmlFor="full-time-hours" className="number-font">
+                {undergradCheck ? "12+" : "9+"}
+              </label>
+            </div>
+            )}
     </div>
   );
 }
 
-
 function LevelTwo (props) {
+  const level = props.level;
+  const multiplier = props.multiplier;
   const show = props.distance;
   const change = props.expenses;
-  const isMobile = useMediaQuery({ query: '(max-width: 370px)' })
+  const credit = props.credit;
+  const isMobile = useMediaQuery({ query: '(max-width: 370px)' });
   return (
-    <Transition items={show} from={{height:0, overflow: "hidden", padding: "0px 0px"}} enter={isMobile ? {height: 450, padding: "10px 0px"} : {height: 288, padding: "10px 0px"}} leave={{height:0, padding: "0px 0px"}}>
-    {show => show && (props => <div style={props} className="secondary-container no-float">
+    <Transition config={{duration:300}} items={show} from={{maxHeight:0, overflow: "hidden", padding: "0px 0px"}} enter={isMobile ? {maxHeight: 450, padding: "10px 0px"} : {maxHeight: 288, padding: "10px 0px"}} leave={{maxHeight:0, padding: "0px 0px"}}>
+    {show => show && (props =>
+      <div style={props} className="secondary-container no-float">
+        <div className="input-container" role="group" aria-labelledby="car">
+          <h3 id="car">Car on campus?</h3>
+          <InputGroup id={"yes-resident"} value={costs.carResident} label={"Resident"} name={"car"} change={change}/>
+          <InputGroup id={"yes-commuter"} value={costs.carCommuter} label={"Commuter"} name={"car"} change={change}/>
+          <InputGroup id={"no-car"} value={"0"} label={"No"} name={"car"} change={change}/>
+        </div>
+        <div className="input-container" role="group" aria-labelledby="meal">
+          <h3 id="meal">Meal Plan?</h3>
+          <InputGroup id={"yes-meal-plan"} value={costs.meal} label={"Yes"} name={"meal"} change={change}/>
+          <InputGroup id={"no-meal-plan"} value={"0"} label={"No"} name={"meal"} change={change}/>
+        </div>
+        <Living change={change} credit={credit}/>
+        <Healthinsurance change={change} level={level} multiplier={multiplier}/>
+      </div>)}
+    </Transition>
+  )
+}
+function Living (props) {
+  const show = props.credit === "full-time";
+  const isMobile = useMediaQuery({ query: '(max-width: 370px)' });
+  const change = props.change;
+  return (
+    <Transition items={show} from={{height:0, overflow: "hidden"}} enter={isMobile ? {height: 126} : {height: 72}} leave={{height:0}}>
+      {show => show && (props =>
+    <div className="no-float" style={props}>
       <div className="input-container" role="group" aria-labelledby="living">
         <h3 id="living">Living on campus?</h3>
-        <div className="input-group">
-          <input type="radio" id="on-campus-single" value={costs.livingSingle} name="living" onChange={change}></input>
-          <label htmlFor="on-campus-single">Single</label>
-        </div>
-        <div className="input-group">
-          <input type="radio" id="on-campus-double" value={costs.livingDouble} name="living" onChange={change}></input>
-          <label htmlFor="on-campus-double">Double</label>
-        </div>
-        <div className="input-group">
-          <input type="radio" id="off-campus" value="0" name="living" onChange={change}></input>
-          <label htmlFor="off-campus">No</label>
-        </div>
+        <InputGroup id={"on-campus-single"} value={costs.livingSingle} label={"Single"} name={"living"} change={change}/>
+        <InputGroup id={"on-campus-double"} value={costs.livingDouble} label={"Double"} name={"living"} change={change}/>
+        <InputGroup id={"off-campus"} value={"0"} label={"No"} name={"living"} change={change}/>
       </div>
-      <div className="input-container" role="group" aria-labelledby="car">
-        <h3 id="car">Car on campus?</h3>
-        <div className="input-group">
-          <input type="radio" id="yes-resident" value={costs.carResident} name="car" onChange={change}></input>
-          <label htmlFor="yes-resident">Resident</label>
+    </div>
+  )}
+  </Transition>
+  )
+}
+function Healthinsurance (props) {
+  const undergradCheck = props.multiplier > 1 && props.level === "undergrad";
+  const gradCheck = props.multiplier > 2 && props.level === "grad";
+  const change = props.change;
+  const show = undergradCheck || gradCheck;
+  const isMobile = useMediaQuery({ query: '(max-width: 370px)' });
+  return (
+    <Transition items={show} from={{height:0, overflow: "hidden"}} enter={isMobile ? {height: 99} : {height: 72}} leave={{height:0}}>
+      {show => show && (props =>
+      <div className="no-float" style={props}>
+        <div className="input-container" role="group" aria-labelledby="health">
+          <h3 id="health">Health Insurance?</h3>
+          <InputGroup id={"yes-health"} value={costs.health} label={"Yes"} name={"health"} change={change}/>
+          <InputGroup id={"no-health"} value={"0"} label={"No"} name={"health"} change={change}/>
         </div>
-        <div className="input-group">
-          <input type="radio" id="yes-commuter" value={costs.carCommuter} name="car" onChange={change}></input>
-          <label htmlFor="yes-commuter">Commuter</label>
-        </div>
-        <div className="input-group no-right-margin">
-          <input type="radio" id="no-car" value="0" name="car" onChange={change}></input>
-          <label htmlFor="no-car">No</label>
-        </div>
-      </div>
-      <div className="input-container" role="group" aria-labelledby="meal">
-        <h3 id="meal">Meal Plan?</h3>
-        <div className="input-group">
-          <input type="radio" id="yes-meal-plan" value={costs.meal} name="meal" onChange={change}></input>
-          <label htmlFor="yes-meal-plan">Yes</label>
-        </div>
-        <div className="input-group">
-          <input type="radio" id="no-meal-plan" value="0" name="meal" onChange={change}></input>
-          <label htmlFor="no-meal-plan">No</label>
-        </div>
-      </div>
-      <div className="input-container" role="group" aria-labelledby="health">
-        <h3 id="health">Health Insurance?</h3>
-        <div className="input-group">
-          <input type="radio" id="yes-health" value={costs.health} name="health" onChange={change}></input>
-          <label htmlFor="yes-health">Yes</label>
-        </div>
-        <div className="input-group">
-          <input type="radio" id="no-health" value="0" name="health" onChange={change}></input>
-          <label htmlFor="no-health">No</label>
-        </div>
-      </div>
-    </div>)}
+      </div>)}
     </Transition>
   )
 }
@@ -149,10 +164,21 @@ class Total extends React.Component {
       <div className="total-container" aria-live="polite">
         <h3>TOTAL</h3>
         <p className="total-cost">$<Animatedtotal totalBefore={this.state.previousTotal} totalAfter={this.state.currentTotal}/></p>
+        <p className="disclaimer">*estimated cost paid to wcu</p>
       </div>
     );
   }
 }
+
+const InputGroup = (props) => {
+  return (
+  <div className="input-group">
+    <input type="radio" id={props.id} value={props.value ? props.value : props.id} name={props.name} onChange={props.change}></input>
+    <label htmlFor={props.id}>{props.label}</label>
+  </div>
+  )
+}
+
 
 class App extends React.Component {
   constructor(props) {
@@ -177,14 +203,17 @@ class App extends React.Component {
     this.handleOtherExpenses = this.handleOtherExpenses.bind(this);
   }
   componentDidUpdate (prevProps, prevState) {
-    if (this.state.multiplier == 3 && this.state.level === "grad" && this.state.level !== prevState.level) {
+    if (this.state.multiplier == 3 && this.state.level === "grad" && this.state.level !== prevState.level && prevState.level !== "") {
       document.getElementById("six-hours").checked = true;
     }
   }
-  levelChanges (a,b,c) {
+  levelChanges (a,b,c,d) {
     if (this.state.credit === "part-time") {
       if (this.state.level === "undergrad"  && this.state.multiplier == 3) {
         this.setState({multiplier: 3})
+      }
+      else if (this.state.level === "") {
+        this.setState({multiplier: d})
       }
       else {
         this.setState(state => ({multiplier: Number(state.multiplier) + c}));
@@ -195,10 +224,10 @@ class App extends React.Component {
   handleLevel(e) {
     this.setState({[e.target.name]: e.target.value});
     if (e.target.value === "undergrad") {
-      this.levelChanges(costs.ui, costs.uo, -1)
+      this.levelChanges(costs.ui, costs.uo, -1, 1)
     }
     else {
-      this.levelChanges(costs.gi, costs.go, 1)
+      this.levelChanges(costs.gi, costs.go, 1, 2)
     }
   }
   residentChanges (a,b) {
@@ -219,11 +248,13 @@ class App extends React.Component {
       this.setState({multiplier: e.target.value});
     }
     else {
+      this.setState({living: 0, health:0});
       this.state.level === "undergrad" ? this.setState({multiplier: 1}) : this.setState({multiplier: 2});
     }
   }
   handleHours(e) {
       this.setState({multiplier: e.target.value});
+      if (e.target.id === "three-hours") {this.setState({health:0})}
   }
   handleDistance(e) {
     const boolValue = e.target.value === "true";
@@ -240,58 +271,34 @@ class App extends React.Component {
     return (
       <div className="container">
         <div className="title-container">
-          <h2>Cost Calculator</h2>
+          <h2>Estimated Cost Calculator</h2>
           <hr/>
         </div>
         <form id="cost-calculator-form">
           <div class="section-one">
             <div className="input-container" role="group" aria-labelledby="level">
               <h3 id="level">Level</h3>
-              <div className="input-group">
-                <input type="radio" id="undergrad" value="undergrad" name="level" onChange={this.handleLevel}></input>
-                <label htmlFor="undergrad">Undergraduate</label>
-              </div>
-              <div className="input-group">
-                <input type="radio" id="grad" value="grad" name="level" onChange={this.handleLevel}></input>
-                <label htmlFor="grad">Graduate</label>
-              </div>
+              <InputGroup id={"undergrad"} label={"Undergraduate"} name={"level"} change={this.handleLevel}/>
+              <InputGroup id={"grad"} label={"Graduate"} name={"level"} change={this.handleLevel}/>
             </div>
             <div className="input-container" role="group" aria-labelledby="resident">
               <h3 id="resident">Resident</h3>
-              <div className="input-group">
-                <input type="radio" id="in-state" value="in-state" name="resident" onChange={this.handleResident}></input>
-                <label htmlFor="in-state">In State</label>
-              </div>
-              <div className="input-group">
-                <input type="radio" id="out-of-state" value="out-of-state" name="resident" onChange={this.handleResident}></input>
-                <label htmlFor="out-of-state">Out of State</label>
-              </div>
+              <InputGroup id={"in-state"} label={"In State"} name={"resident"} change={this.handleResident}/>
+              <InputGroup id={"out-of-state"} label={"Out of State"} name={"resident"} change={this.handleResident}/>
             </div>
             <div className="input-container" role="group" aria-labelledby="credit">
               <h3 id="credit">Credit</h3>
-              <div className="input-group">
-                <input type="radio" id="full-time" value="4" name="credit" onChange={this.handleCredit}></input>
-                <label htmlFor="full-time">Full-Time</label>
-              </div>
-              <div className="input-group">
-                <input type="radio" id="part-time" value="part-time" name="credit" onChange={this.handleCredit}></input>
-                <label htmlFor="part-time">Part-Time</label>
-              </div>
+              <InputGroup id={"full-time"} value={"4"} label={"Full-Time"} name={"credit"} change={this.handleCredit}/>
+              <InputGroup id={"part-time"} label={"Part-Time"} name={"credit"} change={this.handleCredit}/>
             </div>
             <Hours change={this.handleHours} level={this.state.level} credit={this.state.credit}/>
             <div className="input-container" role="group" aria-labelledby="distance">
-              <h3 id="distance">Distance</h3>
-              <div className="input-group">
-                <input type="radio" id="in-person" value="true" name="distance" onChange={this.handleDistance}></input>
-                <label htmlFor="in-person">In Person</label>
-              </div>
-              <div className="input-group">
-                <input type="radio" id="online" value="false" name="distance" onChange={this.handleDistance}></input>
-                <label htmlFor="online">Online</label>
-              </div>
+              <h3 id="distance">Location</h3>
+              <InputGroup id={"in-person"} value={"true"} label={"In Person"} name={"distance"} change={this.handleDistance}/>
+              <InputGroup id={"online"} value={"false"} label={"Online"} name={"distance"} change={this.handleDistance}/>
             </div>
           </div>
-          <LevelTwo expenses={this.handleOtherExpenses} distance={this.state.distance}/>
+          <LevelTwo credit={this.state.credit} level={this.state.level} multiplier={this.state.multiplier} expenses={this.handleOtherExpenses} distance={this.state.distance}/>
         </form>
         <Total creditCost={this.state.creditCostInitial} multiplier={this.state.multiplier} distance={this.state.distance} living={this.state.living} car={this.state.car} meal={this.state.meal} health={this.state.health}/>
       </div>
