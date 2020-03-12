@@ -17,6 +17,7 @@ const costs = {
   health: "1350"
 };
 
+
 function Hours(props) {
   const level = props.level;
   const change = props.change;
@@ -36,7 +37,7 @@ function Hourscontainer(props) {
     <div className="input-container secondary-container hours-container" role="group" aria-labelledby="hours">
       <h3 id="hours">Hours</h3>
         {showCredit ? (
-          <div>
+          <div className="no-float">
             <div className="input-group-hours">
               <input type="radio" id="three-hours" value={undergradCheck ? "1" : "2"} name="hours" onChange={props.change} defaultChecked></input>
               <label htmlFor="three-hours" className="number-font">3</label>
