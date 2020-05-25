@@ -14,6 +14,7 @@ Replace these files:
 * `App.css`
 * `App.js`
 
-To customize the numbers, edit this variable in App.js:
+To customize the numbers, edit these variables in App.js:
 
 `const costs = {...}`
+`const costsDLP = {...}`

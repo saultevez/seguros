@@ -139,10 +139,14 @@
 }
 #cost-calculator .disclaimer {
   color: #343434;
-  margin: 5px;
+  margin: 5px 0px 0px 0px;
   font-size: 12px;
   font-weight: 500;
   text-transform: uppercase;
+}
+#cost-calculator .input-container .disclaimer {
+  color: white;
+  margin: 0px;
 }
 .no-float {
   float:none;

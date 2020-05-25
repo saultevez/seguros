@@ -14,8 +14,19 @@ const costs = {
   carResident: "400",
   carCommuter: "324",
   meal: "2447",
-  health: "1350"
+  health: "1313.50",
+  ufees: [399.43, 798.85, 1198.28, 1642.50],
+  gfees: [0, 320.80, 641.48, 1489.50]
 };
+
+const costsDLP = {
+  ui: 101.34,
+  uo: 506.76,
+  gi: 652.2,
+  go: 2182.65,
+  ufees: [60.3, 120.6, 180.9, 241.2],
+  gfees: [0, 87.51, 175.02, 262.53]
+}
 
 
 function Hours(props) {
@@ -73,7 +84,7 @@ function LevelTwo (props) {
   const credit = props.credit;
   const isMobile = useMediaQuery({ query: '(max-width: 370px)' });
   return (
-    <Transition config={{duration:300}} items={show} from={{maxHeight:0, overflow: "hidden", padding: "0px 0px"}} enter={isMobile ? {maxHeight: 450, padding: "10px 0px"} : {maxHeight: 288, padding: "10px 0px"}} leave={{maxHeight:0, padding: "0px 0px"}}>
+    <Transition config={{duration:300}} items={show} from={{maxHeight:0, overflow: "hidden", padding: "0px 0px"}} enter={isMobile ? {maxHeight: 482, padding: "10px 0px"} : {maxHeight: 320, padding: "10px 0px"}} leave={{maxHeight:0, padding: "0px 0px"}}>
     {show => show && (props =>
       <div style={props} className="secondary-container no-float">
         <div className="input-container" role="group" aria-labelledby="car">
@@ -119,11 +130,12 @@ function Healthinsurance (props) {
   const show = undergradCheck || gradCheck;
   const isMobile = useMediaQuery({ query: '(max-width: 370px)' });
   return (
-    <Transition items={show} from={{height:0, overflow: "hidden"}} enter={isMobile ? {height: 99} : {height: 72}} leave={{height:0}}>
+    <Transition items={show} from={{height:0, overflow: "hidden"}} enter={isMobile ? {height: 131} : {height: 104}} leave={{height:0}}>
       {show => show && (props =>
       <div className="no-float" style={props}>
         <div className="input-container" role="group" aria-labelledby="health">
           <h3 id="health">Health Insurance?</h3>
+          <p className="disclaimer">*if you already have health insurance this option may be waved</p>
           <InputGroup id={"yes-health"} value={costs.health} label={"Yes"} name={"health"} change={change}/>
           <InputGroup id={"no-health"} value={"0"} label={"No"} name={"health"} change={change}/>
         </div>
@@ -133,9 +145,9 @@ function Healthinsurance (props) {
 }
 
 function Animatedtotal (props) {
-  const animateProps = useSpring({config:{duration: 500},number: props.totalAfter, from: {number: props.totalBefore}});
+  const animateProps = useSpring({config:{duration: 530},number: props.totalAfter, from: {number: props.totalBefore}});
   return (
-    <animated.span className="total-font">{animateProps.number.interpolate(number => Math.floor(number))}</animated.span>
+    <animated.span className="total-font">{animateProps.number.interpolate(number => number.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","))}</animated.span>
   )
 }
 
@@ -153,10 +165,11 @@ class Total extends React.Component {
         this.props.living !== prevProps.living || 
         this.props.car !== prevProps.car || 
         this.props.meal !== prevProps.meal || 
-        this.props.health !== prevProps.health) 
+        this.props.health !== prevProps.health ||
+        this.props.fees !== prevProps.fees)
     {
-      const previous = Math.ceil(prevProps.creditCost * prevProps.multiplier) + Number(prevProps.living) + Number(prevProps.car) + Number(prevProps.meal) + Number(prevProps.health);
-      const current = Math.ceil(this.props.creditCost * this.props.multiplier) + Number(this.props.living) + Number(this.props.car) + Number(this.props.meal) + Number(this.props.health);
+      const previous = Math.ceil(prevProps.creditCost * prevProps.multiplier) + Number(prevProps.living) + Number(prevProps.car) + Number(prevProps.meal) + Number(prevProps.health) + prevProps.fees;
+      const current = Math.ceil(this.props.creditCost * this.props.multiplier) + Number(this.props.living) + Number(this.props.car) + Number(this.props.meal) + Number(this.props.health) + this.props.fees;
       this.setState({previousTotal: previous, currentTotal: current})
     }
   }
@@ -165,7 +178,7 @@ class Total extends React.Component {
       <div className="total-container" aria-live="polite">
         <h3>TOTAL</h3>
         <p className="total-cost">$<Animatedtotal totalBefore={this.state.previousTotal} totalAfter={this.state.currentTotal}/></p>
-        <p className="disclaimer">*estimated cost paid to wcu</p>
+        <p className="disclaimer">*This total is an estimated cost paid to WCU. This estimation does not include program-specific fees, graduate tuition differentials, or additional personal costs.</p>
       </div>
     );
   }
@@ -194,7 +207,8 @@ class App extends React.Component {
       living: false,
       car: false,
       meal: false,
-      health: false
+      health: false,
+      fees: 0
     };
     this.handleLevel = this.handleLevel.bind(this);
     this.handleResident = this.handleResident.bind(this);
@@ -208,27 +222,31 @@ class App extends React.Component {
       document.getElementById("six-hours").checked = true;
     }
   }
-  levelChanges (a,b,c,d) {
+  levelChanges (a,b,c,d,e) {
     if (this.state.credit === "part-time") {
       if (this.state.level === "undergrad"  && this.state.multiplier == 3) {
-        this.setState({multiplier: 3})
+        this.setState({multiplier: 3, fees: e[2]})
       }
       else if (this.state.level === "") {
-        this.setState({multiplier: d})
+        this.setState({multiplier: d, fees: e[d - 1]})
       }
       else {
-        this.setState(state => ({multiplier: Number(state.multiplier) + c}));
+        this.setState(state => ({multiplier: Number(state.multiplier) + c, fees: e[Number(state.multiplier) + c - 1]}));
       }
+    }
+    if (this.state.credit === "full-time") {
+      this.setState({fees: e[this.state.multiplier - 1]})
     }
     this.state.resident === "in-state" ? this.setState({creditCostInitial:a}) : this.state.resident === "out-of-state" ? this.setState({creditCostInitial:b}) : this.setState({creditCostInitial:0});
   }
   handleLevel(e) {
     this.setState({[e.target.name]: e.target.value});
+    const costVar = this.state.distance ? costs : costsDLP;
     if (e.target.value === "undergrad") {
-      this.levelChanges(costs.ui, costs.uo, -1, 1)
+      this.levelChanges(costVar.ui, costVar.uo, -1, 1, costVar.ufees)
     }
     else {
-      this.levelChanges(costs.gi, costs.go, 1, 2)
+      this.levelChanges(costVar.gi, costVar.go, 1, 2, costVar.gfees)
     }
   }
   residentChanges (a,b) {
@@ -236,32 +254,53 @@ class App extends React.Component {
   }
   handleResident(e){
     this.setState({[e.target.name]: e.target.value});
+    const costVar = this.state.distance ? costs : costsDLP;
     if (e.target.value === "in-state") {
-      this.residentChanges(costs.ui, costs.gi)
+      this.residentChanges(costVar.ui, costVar.gi)
     }
     else {
-      this.residentChanges(costs.uo, costs.go)
+      this.residentChanges(costVar.uo, costVar.go)
     }
   }
   handleCredit(e) {
     this.setState({[e.target.name]: e.target.id});
+    const costVar = this.state.distance ? costs : costsDLP;
     if (e.target.id === "full-time") {
       this.setState({multiplier: e.target.value});
+      this.state.level === "undergrad" ? this.setState({fees: costVar.ufees[3]}) : this.state.level === "grad" ? this.setState({fees: costVar.gfees[3]}) : this.setState({fees: 0});
     }
     else {
       this.setState({living: 0, health:0});
       this.state.level === "undergrad" ? this.setState({multiplier: 1}) : this.setState({multiplier: 2});
+      this.state.level === "undergrad" ? this.setState({fees: costVar.ufees[0]}) : this.state.level === "grad" ? this.setState({fees: costVar.gfees[1]}) : this.setState({fees: 0});
     }
   }
   handleHours(e) {
       this.setState({multiplier: e.target.value});
+      const costVar = this.state.distance ? costs : costsDLP;
+      this.state.level === "undergrad" ? this.setState({fees: costVar.ufees[Number(e.target.value) - 1]}) : this.state.level === "grad" ? this.setState({fees: costVar.gfees[Number(e.target.value) - 1]}) : this.setState({fees: 0});
       if (e.target.id === "three-hours") {this.setState({health:0})}
+  }
+  distanceChanges(a) {
+    const multiplier = Number(this.state.multiplier);
+    if (this.state.level !== ""  && this.state.credit !== "") {
+      if (this.state.level === "undergrad") {
+        this.state.resident === "in-state" ? this.setState({creditCostInitial: a.ui, fees: a.ufees[multiplier - 1]}) : this.state.resident === "out-of-state" ? this.setState({creditCostInitial: a.uo, fees: a.ufees[multiplier - 1]}) : this.setState({creditCostInitial: 0, fees: a.ufees[multiplier - 1]});
+      }
+      else {
+        this.state.resident === "in-state" ? this.setState({creditCostInitial: a.gi, fees: a.gfees[multiplier - 1]}) : this.state.resident === "out-of-state" ? this.setState({creditCostInitial: a.go, fees: a.gfees[multiplier - 1]}) : this.setState({creditCostInitial: 0, fees: a.gfees[multiplier - 1]});
+      }
+    }
   }
   handleDistance(e) {
     const boolValue = e.target.value === "true";
     this.setState({[e.target.name]: boolValue});
     if (e.target.id === "online") {
       this.setState({living: 0, car: 0, meal: 0, health: 0});
+      this.distanceChanges(costsDLP)
+    }
+    else {
+      this.distanceChanges(costs)
     }
   }
   handleOtherExpenses(e) {
@@ -301,7 +340,7 @@ class App extends React.Component {
           </div>
           <LevelTwo credit={this.state.credit} level={this.state.level} multiplier={this.state.multiplier} expenses={this.handleOtherExpenses} distance={this.state.distance}/>
         </form>
-        <Total creditCost={this.state.creditCostInitial} multiplier={this.state.multiplier} distance={this.state.distance} living={this.state.living} car={this.state.car} meal={this.state.meal} health={this.state.health}/>
+        <Total creditCost={this.state.creditCostInitial} multiplier={this.state.multiplier} distance={this.state.distance} living={this.state.living} car={this.state.car} meal={this.state.meal} health={this.state.health} fees={this.state.fees}/>
       </div>
     );
   }
