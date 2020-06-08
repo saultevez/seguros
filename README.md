@@ -8,13 +8,12 @@ A calculator developed with create react app that dynamically renders the total 
 
 Follow create react app installation instructions
 
-Replace these files:
+Make any custom edits in these files:
 
-* `index.html`
 * `App.css`
 * `App.js`
 
-To customize the numbers, edit these variables in App.js:
+To simply customize the numbers, edit these variables in App.js:
 
 `const costs = {...}`
 `const costsDLP = {...}`
