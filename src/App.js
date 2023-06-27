@@ -1,9 +1,11 @@
 import React from 'react';
 import './App.css';
 import Navbar from './navbar';
-import { BrowserRouter as Router,
-  Routes, 
-  Route }
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route
+}
     from 'react-router-dom';
 import Home from './pages';
 import Contact from './pages/contact';
@@ -13,6 +15,7 @@ import Svida from './pages/seguroVida';
 
 function App() {
     return (
+
         <Router>
             <Navbar />
             <Routes>
@@ -22,8 +25,12 @@ function App() {
                 <Route path='/seguro-vida' element={<Svida />} />
                 <Route path='/contact' element={<Contact />} />
             </Routes>
+
         </Router>
+
+
+
     );
 }
- 
+
 export default App;

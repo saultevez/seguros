@@ -13,7 +13,7 @@ function NicotineUse(props) {
   const change = props.change;
   const show = nicotine == 1;
   return (
-    <Transition items={show} from={{ height: 0, overflow: "hidden" }} enter={{ height: 72 }} leave={{ height: 0 }}>
+    <Transition items={show} from={{ height: 0, overflow: "hidden" }} enter={{ height: 170 }} leave={{ height: 0 }}>
       {(show) =>
         show &&
         ((props) => (
@@ -30,7 +30,7 @@ function NicotineYearsContainer(props) {
   const showNicotine = props.nicotine == 1;
   return (
     <div className='input-container secondary-container hours-container' role='group' aria-labelledby='nicotine-use'>
-      <h3 id='NicotineUse'>Cuantos años </h3>
+      <h3 id='NicotineUse'>Cuantos años</h3>
       {showNicotine ? (
         <div className='no-float'>
           <div className='input-group-hours'>
@@ -97,12 +97,13 @@ class Total extends React.Component {
   render() {
     return (
       <div className='total-container' aria-live='polite'>
+        <hr></hr>
         <h3>TOTAL</h3>
         <p className='total-cost'>
           s/.<Animatedtotal totalBefore={this.state.previousTotal} totalAfter={this.state.currentTotal} />
-        <span> /mes </span></p>
+        <span class="mes"> /mes </span></p>
         <p className='disclaimer'>
-          *Este total es un costo estimado basado en las respuestas a este cuestiorio. El costo final puede variar.
+          *Este total es un costo estimado basado en las respuestas a este cuestiorio. <br></br> El costo final puede variar.
         </p>
       </div>
     );
@@ -220,13 +221,17 @@ class Ssalud extends React.Component {
   }
   render() {
     return (
-      <div className='container'>
+      <div className='container slim card'>
         <div class="nav">
-          <img src={logo} alt=""></img>
           
         </div>
         <div className='title-container'>
-          <h2>Calcula tu seguro</h2>
+          <h2>Calcula tu seguro de salud</h2>
+          <Total
+          agePrice = {this.state.agePrice}
+          sexPrice = {this.state.sexPrice}
+          nicotinePrice = {this.state.nicotinePrice}
+        />
           <hr />
         </div>
         <form id='cost-calculator-form'>
@@ -237,22 +242,20 @@ class Ssalud extends React.Component {
             </div>
             <div className='input-container' role='group' aria-labelledby='Sexo'>
               <h3 id='sexo'>Sexo</h3>
+              <div class="input-options">
               <InputGroup id={"hombre"} value={"hombre"} label={"Hombre"} name={"sexo"} change={this.handleSex} />
               <InputGroup id={"mujer"} value={"mujer"} label={"Mujer"} name={"sexo"} change={this.handleSex} />
+              </div>
             </div>
             <div className='input-container' role='group' aria-labelledby='nicotine'>
               <h3 id='nicotine'>¿Consumes o has consumido productos con nicotina?</h3>
-              <InputGroup id={"si"} value={1} label={"Si"} name={"nicotine"} change={this.handleNicotine} />
-              <InputGroup id={"no"} value={0} label={"No"} name={"nicotine"} change={this.handleNicotine} />
+              <div class="input-options">
+                <InputGroup id={"si"} value={1} label={"Si"} name={"nicotine"} change={this.handleNicotine} />
+              <InputGroup id={"no"} value={0} label={"No"} name={"nicotine"} change={this.handleNicotine} /></div>
             </div>
             <NicotineUse change={this.handleNicotineUse} nicotine={this.state.nicotine} />
           </div>
         </form>
-        <Total
-          agePrice = {this.state.agePrice}
-          sexPrice = {this.state.sexPrice}
-          nicotinePrice = {this.state.nicotinePrice}
-        />
       </div>
     );
   }
