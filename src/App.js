@@ -12,6 +12,7 @@ import Contact from './pages/contact';
 import Saccidentes from './pages/seguroAccidentes';
 import Ssalud from './pages/seguroSalud';
 import Svida from './pages/seguroVida';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 function App() {
     return (
