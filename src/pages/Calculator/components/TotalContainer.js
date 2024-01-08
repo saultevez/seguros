@@ -29,18 +29,19 @@ const TotalContainer = (props) => {
   }, [props.agePrice, props.sexPrice, props.nicotinePrice])
 
   return (
-    <div className="total-container" aria-live="polite">
-      <hr></hr>
-      <h3>TOTAL</h3>
-      <p className="total-cost">
-        s/.
-        <Animatedtotal
-          totalBefore={total.previousTotal}
-          totalAfter={total.currentTotal}
-        />
-        <span className="mes"> /mes </span>
-      </p>
-      <p className="disclaimer">
+    <div className="flex flex-col gap-2 py-4" aria-live="polite">
+      <div>
+        <h3 className="text-neutral-500 font-bold text-sm">TOTAL</h3>
+        <p className="text-blue-500 font-bold text-4xl">
+          s/.
+          <Animatedtotal
+            totalBefore={total.previousTotal}
+            totalAfter={total.currentTotal}
+          />
+          <span className="text-neutral-700 text-sm"> /mes </span>
+        </p>
+      </div>
+      <p className="text-neutral-500 text-sm">
         *Este total es un costo estimado basado en las respuestas a este
         cuestionario. <br></br> El costo final puede variar.
       </p>

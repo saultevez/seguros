@@ -12,6 +12,7 @@ import FormularioHogar from './pages/Calculator/FormularioHogar'
 import Ssalud from './pages/Calculator/seguroSalud'
 import Svida from './pages/Calculator/seguroVida'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
+import './index.css'
 
 function App() {
     return (

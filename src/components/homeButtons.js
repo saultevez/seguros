@@ -4,20 +4,20 @@ import '../../src/App.css'
 
 function HomeButtons() {
   return (
-    <div class="container-main">
-      <ul class="home-buttons-container">
-      <li class="home-button">
-        <Link to="/seguro-contra-accidentes">Seguro Contra Accidentes</Link>
-      </li>
-      <li class="home-button">
-        <Link to="/seguro-salud">Seguro de Salud</Link>
-      </li>
-      <li class="home-button">
-        <Link to="/seguro-vida">Seguro de Vida</Link>
-      </li>
-    </ul>
+    <div class="w-full">
+      <ul class="flex flex-col items-center gap-4 font-bold">
+        <li className="text-black hover:text-blue-500">
+          <Link to="/seguro-contra-accidentes">Seguro Contra Accidentes</Link>
+        </li>
+        <li class="text-black hover:text-blue-500">
+          <Link to="/seguro-salud">Seguro de Salud</Link>
+        </li>
+        <li class="text-black hover:text-blue-500">
+          <Link to="/seguro-vida">Seguro de Vida</Link>
+        </li>
+      </ul>
     </div>
-    
+
   )
 }
 

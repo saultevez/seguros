@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const InputLayout = ({ label, helpText, errorText, id, children }) => {
+const InputLayout = ({ label, helpText, errorText, id, children, className }) => {
     return (
-        <div className='input-layout'>
+        <div className= {className ? className : 'flex flex-col gap-2 w-full'}>
             {label && (
-                <label htmlFor={id} className="mb-2 font-sans font-bold capitalize">
+                <label htmlFor={id} className="font-sans capitalize">
                     {label}
                 </label>
             )}

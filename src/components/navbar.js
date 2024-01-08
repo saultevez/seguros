@@ -5,11 +5,11 @@ import '../../src/App.css'
 function Navbar() {
   return (
     <nav>
-      <ul>
-        <li class="logo">
+      <ul className="flex p-4 items-center gap-4">
+        <li class="w-12">
           <Link to="/"><img className='logo' alt="logo" src={logo}/></Link>
         </li>
-        <li>
+        <li className="ml-auto">
           <Link to="/seguro-contra-accidentes">Seguro Contra Accidentes</Link>
         </li>
         <li>

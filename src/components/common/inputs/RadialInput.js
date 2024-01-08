@@ -2,9 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import InputLayout from './InputLayout'
 
-const RadialInput = ({id, value, onChange, name, helpText, errorText, label}) => {
+const RadialInput = ({id, value, onChange, name, helpText, errorText, label, className}) => {
     return (
         <InputLayout id={id}
+        className={className}
         label={label}
         value={value}
         onChange={onChange}
