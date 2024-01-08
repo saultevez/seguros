@@ -1,18 +1,17 @@
-import React from 'react';
-import './App.css';
-import Navbar from './navbar';
+import React from 'react'
+import Navbar from './components/navbar'
 import {
     BrowserRouter as Router,
     Routes,
     Route
 }
-    from 'react-router-dom';
-import Home from './pages';
-import Contact from './pages/contact';
-import Saccidentes from './pages/seguroAccidentes';
-import Ssalud from './pages/seguroSalud';
-import Svida from './pages/seguroVida';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+    from 'react-router-dom'
+import Home from './pages'
+import Contact from './pages/contact'
+import FormularioHogar from './pages/Calculator/FormularioHogar'
+import Ssalud from './pages/Calculator/seguroSalud'
+import Svida from './pages/Calculator/seguroVida'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 function App() {
     return (
@@ -20,8 +19,8 @@ function App() {
         <Router>
             <Navbar />
             <Routes>
-                <Route exact path='/' exact element={<Home />} />
-                <Route path='/seguro-contra-accidentes' element={<Saccidentes />} />
+                <Route exact path='/'  element={<Home />} />
+                <Route path='/seguro-contra-accidentes' element={<FormularioHogar />} />
                 <Route path='/seguro-salud' element={<Ssalud />} />
                 <Route path='/seguro-vida' element={<Svida />} />
                 <Route path='/contact' element={<Contact />} />
@@ -31,7 +30,7 @@ function App() {
 
 
 
-    );
+    )
 }
 
-export default App;
+export default App

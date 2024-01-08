@@ -1,6 +1,6 @@
-import React from "react";
-import { BrowserRouter, Route, Link } from "react-router-dom";
-import "./App.css";
+import React from "react"
+import { BrowserRouter, Route, Link } from "react-router-dom"
+import '../../src/App.css'
 
 function HomeButtons() {
   return (
@@ -18,7 +18,7 @@ function HomeButtons() {
     </ul>
     </div>
     
-  );
+  )
 }
 
-export default HomeButtons;
+export default HomeButtons

@@ -1,5 +1,5 @@
 
-import HomeButtons from '../homeButtons';
+import HomeButtons from '../components/homeButtons'
 import React from 'react';
 
 const Home = () => {

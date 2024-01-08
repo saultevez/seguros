@@ -29,6 +29,7 @@ nav {
 }
 .logo {
   flex-grow: 1;
+  max-width: 60px;
 }
 #logo-svg:hover{
   fill: #0daea9;
@@ -105,6 +106,11 @@ nav ul li a:active {
   margin: auto;
 }
 
+.input-layout {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
 .input-options {
   display: flex;
   gap: 2rem;
@@ -175,8 +181,6 @@ input[type="text"]:focus {
   margin: 0 0 1rem 0;
 }
 input[type="radio"]:checked, input[type="radio"]:not(:checked) {
-    position: absolute;
-    left: -9999px;
 }
 input[type="radio"]:checked + label, input[type="radio"]:not(:checked) + label
 {
@@ -193,7 +197,6 @@ input[type="radio"]:focus + label{
 
 input[type="radio"]:checked + label:before, input[type="radio"]:not(:checked) + label:before {
     content: '';
-    position: absolute;
     left: 0;
     top: 0;
     width: 12px;
