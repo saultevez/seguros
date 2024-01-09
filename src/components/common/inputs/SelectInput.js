@@ -1,9 +1,9 @@
-// SelectInput.jsx
 import React from 'react'
 import PropTypes from 'prop-types'
 import InputLayout from './InputLayout'
+import classNames from 'classnames'
 
-const SelectInput = ({ id, value, onChange, name, helpText, errorText, label, options, className, register }) => {
+const SelectInput = ({ id, inputClassname, onChange, name, helpText, errorText, label, options, className, register }) => {
   return (
     <InputLayout
       id={id}
@@ -14,8 +14,8 @@ const SelectInput = ({ id, value, onChange, name, helpText, errorText, label, op
       helpText={helpText}
       errorText={errorText}
     >
-      <select
-        className='bg-neutral-100 h-8 rounded px-2'
+      <select 
+        className={classNames(inputClassname, 'duration-300 hover:bg-blue-100 border-transparent focus:bg-blue-100 bg-neutral-100 h-[40px] rounded px-2')}
         id={id}
         onChange={onChange}
         name={name}

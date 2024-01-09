@@ -8,7 +8,7 @@ import {
     from 'react-router-dom'
 import Home from './pages'
 import Contact from './pages/contact'
-import FormularioHogar from './pages/Calculator/FormularioHogar'
+import FormularioHogar from './pages/Calculator/FormularioHogar/FormularioHogar'
 import Ssalud from './pages/Calculator/seguroSalud'
 import Svida from './pages/Calculator/seguroVida'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'

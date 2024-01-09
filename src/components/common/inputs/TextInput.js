@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import InputLayout from './InputLayout'
+import classNames from 'classnames'
 
-const TextInput = ({ id, onChange, register, name, helpText, errorText, label, className }) => {
+const TextInput = ({ id, inputClassname, placeHolder, onChange, register, name, helpText, errorText, label, className }) => {
   return (
     <InputLayout
       className={className}
@@ -14,9 +15,10 @@ const TextInput = ({ id, onChange, register, name, helpText, errorText, label, c
       errorText={errorText}
     >
       <input
-        className="bg-neutral-100 h-8 rounded px-2"
+        className={classNames(inputClassname, 'duration-300 hover:bg-blue-100 border-transparent focus:bg-blue-100 bg-neutral-100 h-[40px] rounded px-2')}
         type="text"
         id={id}
+        placeholder={placeHolder}
         onChange={onChange}
         name={name}
         {...register(id)}
