@@ -3,11 +3,7 @@ import { useForm } from 'react-hook-form'
 import FormContainer from '../components/FormContainer'
 import Button from '../../../components/Button'
 import { SlHome } from "react-icons/sl"
-import MonetaryValueField from './components/MonetaryValueField'
-import DocumentFields from './components/DocumentField'
-import NameFields from './components/NameFields'
-import EmailFields from './components/EmailField'
-import PropertyCharacteristcsFields from './components/PropertyCharacteristicsFields'
+import BirthDateFields from './components/BirthDateFields'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from "yup"
 
@@ -19,11 +15,11 @@ const schema = yup.object({
   documento_tipo: yup.string().required(),
   documento_numero: yup.number('El valor tiene que ser un número').typeError('El valor tiene que ser un número').positive('Número inválido').required('Documento de identidad un campo obligatorio'),
   propiedad_tipo: yup.string().required('Tipo de propiedad es un campo obligatorio'),
-  propiedad_antiguedad: yup.number().positive().required('Antiguedad un campo obligatorio'),
+  fecha_nacimiento: yup.date().required('Antiguedad un campo obligatorio'),
   email: yup.string().email('Por favor introduzca un email válido').required('Email es un campo obligatorio'),
   tipo_seguro: yup.string().required()
 }).required()
-const FormularioHogar = () => {
+const FormularioVida = () => {
   const {
     handleSubmit,
     register,
@@ -38,7 +34,7 @@ const FormularioHogar = () => {
       apellidos: '',
       propiedad_tipo: 'casa',
       propiedad_antiguedad: 10,
-      tipo_seguro: 'hogar'
+      tipo_seguro: 'vida'
     },
     resolver: yupResolver(schema)
   })
@@ -54,16 +50,10 @@ const FormularioHogar = () => {
         <div className='pb-4 flex flex-col gap-2'>
           <h3 className="font-bold mb-2">Información General</h3>
           <div className='mb-2'>
-            <NameFields register={register} errors={errors} />
-            <div className='flex gap-4 items-start'>
-              <DocumentFields register={register} errors={errors} />
-            <EmailFields register={register} errors={errors} />
-            </div>
+            <BirthDateFields register={register} errors={errors}/>
           </div>
           <h3 className="font-bold mb-2">Información Propiedad</h3>
           <div >
-            <MonetaryValueField register={register} errors={errors} />
-            <PropertyCharacteristcsFields register={register} errors={errors} />
           </div>
         </div>
         <Button className=' self-end' type="submit" children={'Cotizar'} />
@@ -72,4 +62,4 @@ const FormularioHogar = () => {
   )
 }
 
-export default FormularioHogar
+export default FormularioVida

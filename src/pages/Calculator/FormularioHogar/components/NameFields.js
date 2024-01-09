@@ -1,10 +1,10 @@
 import React from 'react'
 import TextInput from '../../../../components/common/inputs/TextInput'
 
-const NombresApellidos = ({ register, errors }) => {
+const NameFields = ({ register, errors }) => {
   return (
-    <div>
-      <h3 className="font-bold">Nombres y Apellidos</h3>
+    <div className='mb-2'>
+      <p>Nombres y Apellidos</p>
       <div className={'flex items-start gap-4 py-2'}>
         <TextInput
           id={'nombres'}
@@ -12,10 +12,10 @@ const NombresApellidos = ({ register, errors }) => {
           errorText={errors.nombres?.message}
           placeHolder={'Nombres'}
         />
-        <TextInput placeHolder={'Apellidos'}  id={'apellidos'} register={register} />
+        <TextInput placeHolder={'Apellidos'}  id={'apellidos'} register={register} errorText={errors.apellidos?.message}/>
       </div>
     </div>
   )
 }
 
-export default NombresApellidos
+export default NameFields

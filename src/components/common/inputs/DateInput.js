@@ -3,41 +3,36 @@ import PropTypes from 'prop-types'
 import InputLayout from './InputLayout'
 import classNames from 'classnames'
 
-const SelectInput = ({ id, inputClassname, onChange, name, helpText, errorText, label, options, className, register }) => {
+const DateInput = ({ id, inputClassname, placeHolder, onChange, register, name, helpText, errorText, label, className }) => {
   return (
     <InputLayout
+      className={className}
       id={id}
-      className={classNames(className, 'flex flex-col')}
       label={label}
       onChange={onChange}
       name={name}
       helpText={helpText}
       errorText={errorText}
     >
-      <select 
+      <input
         className={classNames(inputClassname, 'duration-300 hover:bg-blue-100 border-transparent focus:bg-blue-100 bg-neutral-100 h-[40px] rounded px-2')}
+        type="date"
+        min="1920-01-01" 
+        max="2020-12-31"
         id={id}
+        placeholder={placeHolder}
         onChange={onChange}
         name={name}
         {...register(id)}
-      >
-        {options?.map((option, index) => {
-          return (
-            <option key={index} id={index} value={option.value}>
-              {option.label}
-            </option>
-          )
-        })}
-      </select>
+      />
     </InputLayout>
   )
 }
 
-SelectInput.propTypes = {
+DateInput.propTypes = {
   id: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
-  register: PropTypes.func.isRequired
 }
 
-export default SelectInput
+export default DateInput

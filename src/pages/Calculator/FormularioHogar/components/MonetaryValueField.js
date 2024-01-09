@@ -2,10 +2,10 @@ import React from 'react'
 import TextInput from '../../../../components/common/inputs/TextInput'
 import SelectInput from '../../../../components/common/inputs/SelectInput'
 
-const SumaAsegurada = ({ register }) => {
+const MonetaryValueField = ({ register, errors }) => {
   return (
-    <div>
-      <h3 className="font-bold">Suma asegurada</h3>
+    <div className='mb-2'>
+      <p>Suma para asegurar</p>
       <div className={'flex items-start py-2'}>
         <SelectInput
           className={'w-auto flex-1'}
@@ -14,10 +14,10 @@ const SumaAsegurada = ({ register }) => {
           options={[{ label: 'PEN', value: 'soles' }, { label: 'USD', value: 'dolares' }]}
           {...{ register }}
         />
-        <TextInput inputClassname={'rounded-e rounded-s-none'} id={'propiedad_valor'} register={register} />
+        <TextInput inputClassname={'rounded-e rounded-s-none'} id={'propiedad_valor'} register={register} errorText={errors?.propiedad_valor?.message}/>
       </div>
     </div>
   )
 }
 
-export default SumaAsegurada
+export default MonetaryValueField

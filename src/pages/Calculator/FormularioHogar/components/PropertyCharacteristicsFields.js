@@ -1,25 +1,27 @@
 import React from 'react'
 import SelectInput from '../../../../components/common/inputs/SelectInput'
 
-const TipoPropiedadAntiguedad = ({ register }) => {
+const PropertyCharacteristcsFields = ({ register, errors }) => {
   return (
-    <div>
+    <div className='mb-2'>
       <div className='w-full flex gap-4'>
         <div className='w-auto flex-1'>
-          <h3 className="font-bold mb-3">Tipo de propiedad</h3>
+          <p className='mb-3'>Tipo de propiedad</p>
           <SelectInput
-            id="casa_o_depa"
+            id="propiedad_tipo"
             options={[
               { label: 'Casa', value: 'casa' },
               { label: 'Departamento', value: 'departamento' },
             ]}
             {...{ register }}
+            errorText={errors.propiedad_tipo?.message}
           />
         </div>
         <div className='w-auto flex-1'>
-          <h3 className="font-bold mb-3">Antiguedad</h3>
+        <p className='mb-3'>Antiguedad</p>
           <SelectInput
             id="propiedad_antiguedad"
+            errorText={errors.propiedad_antiguedad?.message}
             options={[
               { label: '10', value: 10 },
               { label: '20', value: 20 },
@@ -35,4 +37,4 @@ const TipoPropiedadAntiguedad = ({ register }) => {
   )
 }
 
-export default TipoPropiedadAntiguedad
+export default PropertyCharacteristcsFields
