@@ -1,37 +1,40 @@
-import React from 'react';
-import './App.css';
-import Navbar from './navbar';
+import React from 'react'
+import Navbar from './components/Navbar/NavbarMain'
 import {
     BrowserRouter as Router,
     Routes,
     Route
 }
-    from 'react-router-dom';
-import Home from './pages';
-import Contact from './pages/contact';
-import Saccidentes from './pages/seguroAccidentes';
-import Ssalud from './pages/seguroSalud';
-import Svida from './pages/seguroVida';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+    from 'react-router-dom'
+import Home from './pages'
+import Contact from './pages/contact'
+import FormularioHogar from './pages/Calculator/FormularioHogar/FormularioHogar'
+import FormularioVida from './pages/Calculator/FormulatrioVida/FormularioVida'
+import FormularioSalud from './pages/Calculator/FormularioSalud/FormularioSalud'
+import OtrosSeguros from './pages/OtrosSeguros/OtrosSeguros'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
+import { ReactComponent as CompanyIcon } from './assets/img/logo.svg'
+import { WhatsAppWidget } from 'react-whatsapp-widget'
+import 'react-whatsapp-widget/dist/index.css'
+import './index.css'
 
 function App() {
     return (
-
+        <>
         <Router>
-            <Navbar />
-            <Routes>
-                <Route exact path='/' exact element={<Home />} />
-                <Route path='/seguro-contra-accidentes' element={<Saccidentes />} />
-                <Route path='/seguro-salud' element={<Ssalud />} />
-                <Route path='/seguro-vida' element={<Svida />} />
-                <Route path='/contact' element={<Contact />} />
-            </Routes>
-
+          <Navbar />
+          <Routes>
+            <Route exact path='/'  element={<Home />} />
+            <Route path='/seguro-hogar' element={<FormularioHogar />} />
+            <Route path='/seguro-salud' element={<FormularioSalud />} />
+            <Route path='/seguro-vida' element={<FormularioVida />} />
+            <Route path='/otros-seguros' element={<OtrosSeguros />} />
+            <Route path='/contact' element={<Contact />} />
+          </Routes>
         </Router>
-
-
-
-    );
+        <WhatsAppWidget CompanyIcon={CompanyIcon} phoneNumber="51992771375" companyName="DMV Broker" message="¡Hola! Déjanos tu consulta y te responderemos en breve" />
+        </>
+    )
 }
 
-export default App;
+export default App
