@@ -3,16 +3,16 @@ import { useForm } from 'react-hook-form'
 import FormContainer from '../components/FormContainer'
 import Button from '../../../components/Button'
 import { SlHome } from "react-icons/sl"
-import MonetaryValueField from './components/MonetaryValueField'
+import MonetaryValueField from '../components/MonetaryValueField'
 import DocumentFields from './components/DocumentField'
 import NameFields from './components/NameFields'
-import EmailFields from './components/EmailField'
+import TextFields from '../components/TextField'
 import PropertyCharacteristcsFields from './components/PropertyCharacteristicsFields'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from "yup"
 
 const schema = yup.object({
-  soles_o_dolares: yup.string().required(),
+  tipo_de_moneda: yup.string().required(),
   propiedad_valor: yup.number().typeError('El valor tiene que ser un número').positive('El valor no puede ser 0').required('Por favor introduzca el valor aproximado de su propiedad'),
   nombres: yup.string().required('Nombres es un campo obligatorio'),
   apellidos: yup.string().required('Apellidos es un campo obligatorio'),
@@ -30,10 +30,10 @@ const FormularioHogar = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      soles_o_dolares: 'soles',
-      propiedad_valor: 0,
+      tipo_de_moneda: 'soles',
+      propiedad_valor: null,
       documento_tipo: 'dni',
-      documento_numero: 0,
+      documento_numero: null,
       nombres: '',
       apellidos: '',
       propiedad_tipo: 'casa',
@@ -57,12 +57,12 @@ const FormularioHogar = () => {
             <NameFields register={register} errors={errors} />
             <div className='flex gap-4 items-start'>
               <DocumentFields register={register} errors={errors} />
-            <EmailFields register={register} errors={errors} />
+            <TextFields register={register} errors={errors} id={'email'} label={'Email'} />
             </div>
           </div>
           <h3 className="font-bold mb-2">Información Propiedad</h3>
           <div >
-            <MonetaryValueField register={register} errors={errors} />
+            <MonetaryValueField register={register} errors={errors} id={'propiedad_valor'} />
             <PropertyCharacteristcsFields register={register} errors={errors} />
           </div>
         </div>

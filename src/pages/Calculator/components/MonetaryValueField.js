@@ -1,8 +1,8 @@
 import React from 'react'
-import TextInput from '../../../../components/common/inputs/TextInput'
-import SelectInput from '../../../../components/common/inputs/SelectInput'
+import TextInput from '../../../components/common/inputs/TextInput'
+import SelectInput from '../../../components/common/inputs/SelectInput'
 
-const MonetaryValueField = ({ register, errors }) => {
+const MonetaryValueField = ({ register, errors, id }) => {
   return (
     <div className='mb-2'>
       <p>Suma para asegurar</p>
@@ -10,11 +10,11 @@ const MonetaryValueField = ({ register, errors }) => {
         <SelectInput
           className={'w-auto flex-1'}
           inputClassname='bg-neutral-200 w-16 ps-2 rounded-s rounded-e-none'
-          id={'soles_o_dolares'}
+          id={'tipo_de_moneda'}
           options={[{ label: 'PEN', value: 'soles' }, { label: 'USD', value: 'dolares' }]}
           {...{ register }}
         />
-        <TextInput inputClassname={'rounded-e rounded-s-none'} id={'propiedad_valor'} register={register} errorText={errors?.propiedad_valor?.message}/>
+        <TextInput placeholder={'valor'} inputClassname={'rounded-e rounded-s-none'} id={id} register={register} errorText={errors?.[id]?.message}/>
       </div>
     </div>
   )

@@ -1,24 +1,21 @@
-import React from "react"
-import "../../../App.css"
-import { useSpring, animated } from "react-spring"
-import { Transition } from "react-spring/renderprops"
-import { useMediaQuery } from "react-responsive"
-import { useState, useEffect } from 'react'
+import React from "react";
+import { animated, useSpring } from "react-spring";
+import { Transition } from "react-spring/renderprops";
+import { useMediaQuery } from "react-responsive";
+import { useState, useEffect } from 'react';
 
-function CollapsibleBox({show, children}) {
+function CollapsibleBox({ show, children }) {
+  const props = useSpring({
+    overflow: "hidden",
+    height: show ? 'auto' : 0,
+    opacity: show ? 1 : 0,
+  })
+
   return (
-    <Transition items={show} from={{ height: 0, overflow: "hidden" }} enter={{ height: 170 }} leave={{ height: 0 }}>
-      {(show) =>
-        show &&
-        ((props) => (
-          <div className='no-float' style={props}>
-            {children}
-          </div>
-        ))
-      }
-    </Transition>
+    <animated.div style={props}>
+      {children}
+    </animated.div>
   )
 }
 
-
-export default CollapsibleBox
+export default CollapsibleBox;

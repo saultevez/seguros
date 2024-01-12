@@ -14,7 +14,7 @@ const DocumentFields = ({ register, errors }) => {
           options={[{ label: 'DNI', value: 'dni' }, { label: 'RUC', value: 'ruc' }]}
           {...{ register }}
         />
-        <TextInput  inputClassname={'rounded-e rounded-s-none'} id={'documento_numero'} register={register} errorText={errors?.documento_numero?.message}/>
+        <TextInput placeholder='DNI o RUC' inputClassname={'rounded-e rounded-s-none'} id={'documento_numero'} register={register} errorText={errors?.documento_numero?.message}/>
       </div>
     </div>
   )

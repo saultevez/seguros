@@ -2,7 +2,7 @@ import React from 'react'
 import TextInput from './TextInput'
 import SelectInput from './SelectInput'
 
-const SelectAndTextInput = ({ label, onChange, id, register, options, errors, inputClassname, placeHolder }) => {
+const SelectAndTextInput = ({ label, onChange, id, register, options, errors, inputClassname, placeholder }) => {
   return (
     <div>
       <h3 className="font-bold">{label}</h3>
@@ -22,7 +22,7 @@ const SelectAndTextInput = ({ label, onChange, id, register, options, errors, in
           id={id}
           register={register}
           errorText={errors?.[id]?.message}
-          placeHolder={placeHolder}
+          placeholder={placeholder}
           inputClassname={inputClassname}
           onChange={onChange}
         />

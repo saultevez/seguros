@@ -10,9 +10,9 @@ const NameFields = ({ register, errors }) => {
           id={'nombres'}
           register={register}
           errorText={errors.nombres?.message}
-          placeHolder={'Nombres'}
+          placeholder={'Nombres'}
         />
-        <TextInput placeHolder={'Apellidos'}  id={'apellidos'} register={register} errorText={errors.apellidos?.message}/>
+        <TextInput placeholder={'Apellidos'}  id={'apellidos'} register={register} errorText={errors.apellidos?.message}/>
       </div>
     </div>
   )

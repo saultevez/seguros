@@ -1,5 +1,5 @@
 import React from 'react'
-import DateInput from '../../../../components/common/inputs/DateInput'
+import DateInput from '../../../components/common/inputs/DateInput'
 
 const BirthDateFields = ({ register, errors }) => {
   return (
