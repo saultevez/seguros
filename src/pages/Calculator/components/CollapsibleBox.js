@@ -1,8 +1,8 @@
-import React from "react";
-import { animated, useSpring } from "react-spring";
-import { Transition } from "react-spring/renderprops";
-import { useMediaQuery } from "react-responsive";
-import { useState, useEffect } from 'react';
+import React from "react"
+import { animated, useSpring } from "react-spring"
+import { Transition } from "react-spring/renderprops"
+import { useMediaQuery } from "react-responsive"
+import { useState, useEffect } from 'react'
 
 function CollapsibleBox({ show, children }) {
   const props = useSpring({
@@ -18,4 +18,4 @@ function CollapsibleBox({ show, children }) {
   )
 }
 
-export default CollapsibleBox;
+export default CollapsibleBox

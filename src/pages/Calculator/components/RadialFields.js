@@ -1,7 +1,7 @@
 import React from 'react'
 import RadialInput from '../../../components/common/inputs/RadialInput'
 
-const RadialFields = ({ register, inputClassname, errors, id, options, label, boxSelect }) => {
+const RadialFields = ({ register, inputClassname, errors, id, options, label, boxSelect, control, defaultValue }) => {
   return (
       <RadialInput
         className={'mb-2'}
@@ -12,7 +12,9 @@ const RadialFields = ({ register, inputClassname, errors, id, options, label, bo
         options={options}
         boxSelect={boxSelect}
         inputClassname={inputClassname}
-          {...{ register }}
+        control={control}
+        defaultValue={defaultValue}
+        {...{ register }}
       />
   )
 }

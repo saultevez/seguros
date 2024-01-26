@@ -1,9 +1,9 @@
 
 const insuranceOptions = [
-    { id: 's_economico', label: 'Super económico, lo justo en clinicas, cobertura integral pero oncológico limitado', value: 'super-economico' },
-    { id: 'economico', label: 'Económico, buenas clinicas pero no todas, cobertura integral incluida oncológica', value: 'economico' },
-    { id: 'completo', label: 'Completo con todas las clínicas y coberturas, moderado en primas sin reembolso', value: 'completo' },
-    { id: 'gama_alta', label: 'Gama alta, todas las clinicas, reembolso, mejores deducibles', value: 'gama-alta' }
+    { id: 'super economico', label: <p className="flex flex-col gap-0 text-neutral-800/80"><span className="font-bold text-neutral-700">Super económico</span> Lo justo en clinicas, cobertura integral pero oncológico limitado</p>, value: 'super economico' },
+    { id: 'economico', label: <p className="flex flex-col gap-0 text-neutral-800/80"><span className="font-bold text-neutral-700">Económico</span> Buenas clinicas pero no todas, cobertura integral incluida oncológica</p>, value: 'economico' },
+    { id: 'completo', label: <p className="flex flex-col gap-0 text-neutral-800/80"><span className="font-bold text-neutral-700">Completo</span> Con todas las clínicas y coberturas, moderado en primas sin reembolso</p>, value: 'completo' },
+    { id: 'gama alta', label: <p className="flex flex-col gap-0 text-neutral-800/80"><span className="font-bold text-neutral-700">Gama alta</span> Todas las clinicas, reembolso, mejores deducibles</p>, value: 'gama alta' }
 ]
 
 export default insuranceOptions
