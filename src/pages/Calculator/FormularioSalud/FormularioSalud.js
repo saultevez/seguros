@@ -102,7 +102,7 @@
           action="https://docs.google.com/forms/d/e/1FAIpQLSdpsvRvJj7tqcHWw0Wpi4FlBfFHy2SpQwjyTiCQfHzrYQpQhg/formResponse"
           method="post"
           target="submisionHidden"
-          className="flex-col flex align-end mt-4"
+          className="flex-col flex align-end mt-4"  
           onSubmit={handleSubmit(onSubmit)}
         >
           <GeneralInfo defaultValueDate={fechaDefault} register={register} errors={errors} control={control} />

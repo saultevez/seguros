@@ -9,7 +9,7 @@ const GeneralInfo = ({ register, errors, control, defaultValueDate }) => {
         <div className='pb-4 flex flex-col gap-2'>
             <h3 className="font-bold mb-2">Información General</h3>
             <div className='mb-2'>
-                <div className='flex gap-2 items-start'>
+                <div className='flex gap-4 items-start mb-2'>
                     <BirthDateFields
                         className={'w-auto flex-1'}
                         register={register}
@@ -27,7 +27,7 @@ const GeneralInfo = ({ register, errors, control, defaultValueDate }) => {
                         id={'sexo'}
                         label={'Sexo'} />
                 </div>
-                <div className='flex gap-4 items-start w-full'>
+                <div className='flex gap-4 items-start w-full mb-2'>
                     <TextFields
                     className={'w-auto flex-1'}
                         control={'entry.503191076'}

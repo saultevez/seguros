@@ -80,7 +80,8 @@ const FormularioHogar = () => {
                 register={register} 
                 errors={errors} 
               />
-            <TextFields 
+            <TextFields
+              className={'w-full flex-1'}
               register={register}
               errors={errors} 
               id={'emailAddress'}
