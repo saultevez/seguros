@@ -11,6 +11,7 @@ const GeneralInfo = ({ register, errors, control, defaultValueDate }) => {
             <div className='mb-2'>
                 <div className='flex gap-2 items-start'>
                     <BirthDateFields
+                        className={'w-auto flex-1'}
                         register={register}
                         errors={errors}
                         control={'entry.1110320693'}
@@ -19,19 +20,22 @@ const GeneralInfo = ({ register, errors, control, defaultValueDate }) => {
                         defaultValue={defaultValueDate} />
                     <SelectField
                         control={'entry.1019302940'}
+                        className={'w-auto flex-1'}
                         register={register}
                         errors={errors}
                         options={sexOptions}
                         id={'sexo'}
                         label={'Sexo'} />
                 </div>
-                <div className='flex gap-4 items-start'>
+                <div className='flex gap-4 items-start w-full'>
                     <TextFields
+                    className={'w-auto flex-1'}
                         control={'entry.503191076'}
                         register={register}
                         errors={errors} id={'telefono'}
                         label={'Telefono'} />
                     <TextFields
+                        className={'w-auto flex-1'}
                         id={'emailAddress'}
                         register={register}
                         errors={errors}

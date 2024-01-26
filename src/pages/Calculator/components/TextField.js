@@ -1,10 +1,10 @@
 import React from 'react'
 import TextInput from '../../../components/common/inputs/TextInput'
 
-const TextFields = ({ register, errors, id, label, name, control }) => {
+const TextFields = ({ register, errors, id, label, name, control, className }) => {
   return (
       <TextInput
-        className={'mb-2'}
+        className={className}
         label={label}
         id={id}
         register={register}

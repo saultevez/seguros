@@ -7,6 +7,7 @@ const NameFields = ({ register, errors, idApellidos, idNombres }) => {
       <p>Nombres y Apellidos</p>
       <div className={'flex items-start gap-4 py-2'}>
         <TextInput
+        className={'w-auto flex-1'}
           id='nombres'
           register={register}
           errorText={errors?.nombres?.message}
@@ -14,6 +15,7 @@ const NameFields = ({ register, errors, idApellidos, idNombres }) => {
           control={idNombres}
         />
         <TextInput 
+        className={'w-auto flex-1'}
           placeholder={'Apellidos'}  
           id='apellidos'
           register={register} 

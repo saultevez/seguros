@@ -34,7 +34,7 @@ function App() {
             <Route path='/formulario-enviado' element={<SubmisionConfirmation/>} />
           </Routes>
         </Router>
-        <WhatsAppWidget CompanyIcon={CompanyIcon} phoneNumber="51992771375" companyName="DMV Broker" message="¡Hola! Déjanos tu consulta y te responderemos en breve" />
+        <WhatsAppWidget CompanyIcon={CompanyIcon} phoneNumber="51970177742" companyName="DMV Broker" message="¡Hola! Déjanos tu consulta y te responderemos en breve" />
         </>
     )
 }

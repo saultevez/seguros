@@ -4,7 +4,7 @@ import classNames from 'classnames'
 
 const InputLayout = ({ label, helpText, errorText, id, children, className }) => {
     return (
-        <div className= {classNames(className, 'flex flex-col gap-2 w-full')}>
+        <div className= {classNames(className, 'flex flex-col gap-2')}>
             {label && (
                 <label htmlFor={id} className="font-sans">
                     {label}

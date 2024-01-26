@@ -43,8 +43,8 @@ const DependentsInfo = ({ register, errors, control, fields, append, remove, def
                             <h1>{` ${index + 1} .`}</h1>
                             <div className='flex w-auto flex-1 gap-0 items-center'>
                                 <BirthDateFields
+                                    className={'w-full'}
                                     key={item.id}
-                                    className={'mb-0'}
                                     inputClassname={'rounded-e-none border-neutral-200 border border-e-0'}
                                     register={register}
                                     errors={errors}

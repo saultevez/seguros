@@ -79,12 +79,12 @@ const FormularioHogar = () => {
           <h3 className="font-bold mb-2">Información General</h3>
           <div className='mb-2'>
             <div className='flex gap-2 items-start'>
-              <BirthDateFields label={'Fecha de nacimiento'} id={'fecha_nacimiento'} register={register} errors={errors} control={'entry.1278227690'} defaultValue={fechaDefault} />
-              <SelectField register={register} errors={errors} control={'entry.586574650'} options={sexOptions} id={'sexo'} label={'Sexo'} />
+              <BirthDateFields className={'w-auto flex-1'} label={'Fecha de nacimiento'} id={'fecha_nacimiento'} register={register} errors={errors} control={'entry.1278227690'} defaultValue={fechaDefault} />
+              <SelectField className={'w-auto flex-1'} register={register} errors={errors} control={'entry.586574650'} options={sexOptions} id={'sexo'} label={'Sexo'} />
             </div>
             <div className='flex gap-4 items-start'>
-              <TextFields register={register} control={'entry.2018563547'} errors={errors} id={'telefono'} label={'Telefono'} />
-              <TextFields register={register} name={'emailAddress'} errors={errors} id={'emailAddress'} label={'Email'} /></div>
+              <TextFields className={'w-auto flex-1'} register={register} control={'entry.2018563547'} errors={errors} id={'telefono'} label={'Telefono'} />
+              <TextFields className={'w-auto flex-1'} register={register} name={'emailAddress'} errors={errors} id={'emailAddress'} label={'Email'} /></div>
           </div>
           <h3 className="font-bold mb-2">Información Seguro</h3>
           <div className='mb-2'>
@@ -94,10 +94,10 @@ const FormularioHogar = () => {
             </div>
             <div className={classNames('flex flex-col gap-2 items-start duration-300', seguroVidaTipo === 'vida' ? 'items-start' : 'flex-col')}>
               <div className='flex items-start w-full gap-2'>
-                <MonetaryValueField register={register} idCurrencyAmount={'entry.1452209296'} idCurrency={'entry.1392841856'} errors={errors} id={'suma_asegurada'} />
-                {seguroVidaTipo === 'fondo universitario' && (<BirthDateFields label={'Fecha de nacimiento del niño'} id={'fecha_nacimiento_niño'} register={register} errors={errors} control={'entry.1278227690'} defaultValue={fechaDefault} />)}
+                <MonetaryValueField className={'w-auto flex-1'} register={register} idCurrencyAmount={'entry.1452209296'} idCurrency={'entry.1392841856'} errors={errors} id={'suma_asegurada'} />
+                {seguroVidaTipo === 'fondo universitario' && (<BirthDateFields className={'w-auto flex-1'} label={'Fecha de nacimiento del niño'} id={'fecha_nacimiento_niño'} register={register} errors={errors} control={'entry.1278227690'} defaultValue={fechaDefault} />)}
               </div>
-              <TextFields register={register} control={'entry.354817880'} errors={errors} id={'años_asegurar'} label={seguroVidaTipo === 'vida' ? 'Años a asegurar' : 'Años a asegurar (en función a la edad del niño)'} />
+              <TextFields className={'w-full'} register={register} control={'entry.354817880'} errors={errors} id={'años_asegurar'} label={seguroVidaTipo === 'vida' ? 'Años a asegurar' : 'Años a asegurar (en función a la edad del niño)'} />
             </div>
           </div>
         </div>
