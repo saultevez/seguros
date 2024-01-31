@@ -12,7 +12,7 @@ const InputLayout = ({ label, helpText, errorText, id, children, className }) =>
             )}
             {children}
             {helpText && (
-                <p className="text-xs text-neutral-300">
+                <p className="text-xs text-slate-300">
                     {helpText}
                 </p>
             )}

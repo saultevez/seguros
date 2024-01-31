@@ -36,7 +36,7 @@ const DependentsInfo = ({ register, errors, control, fields, append, remove, def
             </div>
             <CollapsibleBox
                 show={seguroDependientes === 'si'}
-                children={<div className='mb-2 flex flex-col gap-4 rounded-lg bg-neutral-100/50 p-4'>
+                children={<div className='mb-2 flex flex-col gap-4 rounded-lg bg-slate-100/50 p-4'>
                     <h3 className='mb-2'>Fechas de nacimiento de dependientes</h3>
                     {fields.map((item, index) => (
                         <div key={item.id} className='flex items-center gap-2 mb-4'>
@@ -45,7 +45,7 @@ const DependentsInfo = ({ register, errors, control, fields, append, remove, def
                                 <BirthDateFields
                                     className={'w-full'}
                                     key={item.id}
-                                    inputClassname={'rounded-e-none border-neutral-200 border border-e-0'}
+                                    inputClassname={'rounded-e-none border-slate-200 border border-e-0'}
                                     register={register}
                                     errors={errors}
                                     id={`dependientes[${index}].fecha_nacimiento`}
@@ -55,14 +55,14 @@ const DependentsInfo = ({ register, errors, control, fields, append, remove, def
                                 {fields.length > 1 ? (
                                     <Button
                                         type="button"
-                                        className={'h-[40px] rounded-s-none neutral-200 border-s-0 border bg-neutral-100 text-red-600 hover:text-red-600 hover:bg-neutral-200'}
+                                        className={'h-[40px] rounded-s-none slate-200 border-s-0 border bg-slate-100 text-red-600 hover:text-red-600 hover:bg-slate-200'}
                                         onClick={() => remove(index)}
                                         children={<SlTrash />}
                                     />
                                 ) : (
                                     <Button
                                         type="button"
-                                        className={'h-[40px] rounded-s-none neutral-200 border-s-0 border bg-neutral-100 text-gray-400 cursor-not-allowed'}
+                                        className={'h-[40px] rounded-s-none slate-200 border-s-0 border bg-slate-100 text-gray-400 cursor-not-allowed'}
                                         disabled={true}
                                         children={<SlTrash />}
                                     />

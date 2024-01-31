@@ -31,17 +31,17 @@ const TotalContainer = (props) => {
   return (
     <div className="flex flex-col gap-2 py-4" aria-live="polite">
       <div>
-        <h3 className="text-neutral-500 font-bold text-sm">TOTAL</h3>
+        <h3 className="text-slate-500 font-bold text-sm">TOTAL</h3>
         <p className="text-blue-500 font-bold text-4xl">
           s/.
           <Animatedtotal
             totalBefore={total.previousTotal}
             totalAfter={total.currentTotal}
           />
-          <span className="text-neutral-700 text-sm"> /mes </span>
+          <span className="text-slate-700 text-sm"> /mes </span>
         </p>
       </div>
-      <p className="text-neutral-500 text-sm">
+      <p className="text-slate-500 text-sm">
         *Este total es un costo estimado basado en las respuestas a este
         cuestionario. <br></br> El costo final puede variar.
       </p>

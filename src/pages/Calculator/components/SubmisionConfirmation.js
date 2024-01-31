@@ -2,7 +2,7 @@ import React from 'react'
 
 const SubmisionConfirmation = () => {
     return (
-        <div>yay</div>
+        <div className='bg-blue-50'>yay</div>
     )
 }
 export default SubmisionConfirmation

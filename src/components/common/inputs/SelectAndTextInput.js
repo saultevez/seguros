@@ -10,7 +10,7 @@ const SelectAndTextInput = ({ label, onChange, id, register, options, errors, in
         {options ? (
           <SelectInput
             className={'w-auto flex-1'}
-            inputClassname={'bg-neutral-200 h-[40px] w-16 ps-2 rounded-s'}
+            inputClassname={'bg-slate-200 h-[40px] w-16 ps-2 rounded-s'}
             id={id}
             options={options}
             errorText={errors?.[id]?.message}

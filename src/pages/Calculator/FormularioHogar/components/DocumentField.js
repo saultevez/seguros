@@ -10,7 +10,7 @@ const DocumentFields = ({ register, errors, idDocumentType, idDocumentNumber }) 
         <SelectInput
           className={'w-auto flex-1'}
           id='documento_tipo'
-          inputClassname='bg-neutral-200 w-16 ps-2 rounded-s-lg rounded-e-none'
+          inputClassname='bg-slate-200 w-16 ps-2 rounded-s-lg rounded-e-none'
           options={[{ label: 'DNI', value: 'DNI' }, { label: 'RUC', value: 'RUC' }]}
           errorText={errors?.documento_tipo?.message}
           {...{ register }}

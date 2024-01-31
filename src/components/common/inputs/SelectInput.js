@@ -13,7 +13,7 @@ const SelectInput = ({ id, inputClassname, control, onChange, name, helpText, er
       errorText={errorText}
     >
       <select
-        className={classNames(inputClassname, 'duration-300 hover:bg-blue-100 border-transparent focus:bg-blue-100 bg-neutral-100 h-[40px] rounded-lg px-2')}
+        className={classNames(inputClassname, 'duration-300 hover:bg-blue-100 border-transparent focus:bg-blue-100 bg-slate-100 h-[40px] rounded-lg px-2')}
         id={id}
         name={name}
         {...register(id)}

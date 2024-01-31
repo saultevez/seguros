@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import RadialFields from '../../components/RadialFields'
 import discountOptions from './discountOptions'
 import CollapsibleBox from '../../components/CollapsibleBox'
@@ -12,6 +12,11 @@ const InsuranceInfo = ({ register, errors, control, defaultValue }) => {
         control,
         name: 'seguro_gama',
     })
+    const internacional = useWatch({
+        control,
+        name: 'cobertura_internacional',
+    })
+    const compañiasOptions = useMemo(() => compañias(seguroGama, internacional), [seguroGama, internacional])
 
     return (
         <div className="mb-2 flex flex-col gap-4">
@@ -53,7 +58,7 @@ const InsuranceInfo = ({ register, errors, control, defaultValue }) => {
                     register={register}
                     errors={errors}
                     id={'compañias'}
-                    options={compañias}
+                    options={compañiasOptions}
                     control='entry.551609928' />
             </div>
         </div>

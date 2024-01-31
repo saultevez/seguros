@@ -8,7 +8,7 @@ const FormContainer = ({ title, description, total, children, icon }) => {
       <div>
         {icon && (<div className="absolute top-[-10px] p-4 bg-blue-500 rounded-full left-[-15px]">{icon}</div>)}
         <h2 className="font-bold text-xl">{title}</h2>
-        <p className="mb-4 text-neutral-600">{description ? description : 'Descripción del item'}</p>
+        <p className="mb-4 text-slate-600">{description ? description : 'Descripción del item'}</p>
         <hr className="mb-2" />
         {total && (<div> <TotalContainer
           agePrice={total}

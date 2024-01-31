@@ -42,7 +42,7 @@ const RadialInput = ({ id, options, inputClassname, register, control, onChange,
                 : 'w-auto flex-1 flex gap-2 items-center ml-1 text-left',
               {
                 'bg-blue-200/50 border-blue-500 active:shadow-lg': boxSelect && option.id === selected,
-                'bg-neutral-100/50 border-transparent': boxSelect && option.id !== selected,
+                'bg-slate-100/50 border-transparent': boxSelect && option.id !== selected,
               }
             )}
             onClick={() => handleOptionChange(option)}

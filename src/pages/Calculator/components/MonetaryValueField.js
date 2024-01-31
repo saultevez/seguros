@@ -9,7 +9,7 @@ const MonetaryValueField = ({ register, errors, idCurrency, idCurrencyAmount, id
       <div className={'flex items-start py-2 '}>
         <SelectInput
         className={'w-auto'}
-          inputClassname='bg-neutral-200 w-16 ps-2 rounded-s-lg rounded-e-none'
+          inputClassname='bg-slate-200 w-16 ps-2 rounded-s-lg rounded-e-none'
           id='tipo_de_moneda'
           errorText={errors?.tipo_de_moneda?.message}
           options={[{ label: 'PEN', value: 'PEN' }, { label: 'USD', value: 'USD' }]}

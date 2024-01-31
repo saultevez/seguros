@@ -12,8 +12,15 @@
   const calculateInsurance = (formData) => {
     const calculatePrice = () => {
       const numericalValues = Object.values(formData).filter((value) => typeof value === 'number')
-      const total = numericalValues.reduce((acc, value) => acc + value, 0)
-      return total
+    const total = numericalValues.reduce((acc, value) => acc + value, 0)
+    const birthdate = new Date(formData.fecha_nacimiento_titular)
+    const currentDate = new Date()
+    const age = currentDate.getFullYear() - birthdate.getFullYear()
+
+    console.log('Total:', total)
+    console.log('Age:', age)
+
+    return total
     }
 
     return calculatePrice()
@@ -74,7 +81,7 @@
         cobertura_internacional: 'no',
         compañias: null,
         dependientes: [{ fecha_nacimiento: fechaDefault }],
-      });
+      })
     }, [reset, submitted])
     const onSubmit = async (data, e) => {
       e.preventDefault()
@@ -82,8 +89,11 @@
       try {
         await schema.validate(data, { abortEarly: false })
         console.log('Form data:', data)
-        document.getElementById('form-salud').submit()
-        setSubmitted(true)
+        const price = calculateInsurance(data)
+        setInsurancePrice(price)
+        console.log(insurancePrice)
+        //document.getElementById('form-salud').submit()
+        //setSubmitted(true)
       } catch (validationErrors) {
         console.error('Validation errors:', validationErrors)
       }
