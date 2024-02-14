@@ -18,6 +18,7 @@ import { WhatsAppWidget } from 'react-whatsapp-widget'
 import SubmisionConfirmation from './pages/Calculator/components/SubmisionConfirmation'
 import 'react-whatsapp-widget/dist/index.css'
 import './index.css'
+import './assets/css/transitions.css'
 
 function App() {
     return (

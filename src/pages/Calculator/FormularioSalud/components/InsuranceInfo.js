@@ -44,7 +44,7 @@ const InsuranceInfo = ({ register, errors, control, defaultValue }) => {
                         options={insuranceOptions}
                         defaultValue='completo' />
                     <CollapsibleBox
-                        show={seguroGama === 'gama alta'}
+                        show={seguroGama === 'gamaAlta'}
                         children={<RadialFields
                             control={'entry.937800926'}
                             register={register}
