@@ -1,7 +1,7 @@
 import React from 'react'
 import SelectInput from '../../../components/common/inputs/SelectInput'
 
-const SelectField = ({ register, errors, id, options, label, control, className }) => {
+const SelectField = ({ register, errors, id, options, label, control, className, placeholder }) => {
   return (
       <SelectInput
         className={className}
@@ -12,6 +12,7 @@ const SelectField = ({ register, errors, id, options, label, control, className 
         options={options}
         {...{ register }}
         control={control}
+        placeholder={placeholder}
       />
   )
 }

@@ -64,7 +64,7 @@ const useInsuranceCalculator = () => {
         console.log('Insurance:', key)
         console.log('Predicted Fee:', predictedFee)
 
-        result.push({ key, predictedFee, totalDependentsFee })
+        result.push({ key, type: 'salud', predictedFee, totalDependentsFee })
 
       })
     })

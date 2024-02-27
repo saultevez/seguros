@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import InputLayout from './InputLayout'
 import classNames from 'classnames'
 
-const SelectInput = ({ id, inputClassname, control, onChange, name, helpText, errorText, label, options, className, register }) => {
+const SelectInput = ({ id, inputClassname, control, placeholder, onChange, name, helpText, errorText, label, options, className, register }) => {
   return (
     <InputLayout
       id={id}
@@ -15,6 +15,7 @@ const SelectInput = ({ id, inputClassname, control, onChange, name, helpText, er
       <select
         className={classNames(inputClassname, 'duration-300 hover:bg-blue-100 border-transparent focus:bg-blue-100 bg-slate-100 h-[40px] rounded-lg px-2')}
         id={id}
+        placeholder={'selecciona una opción'}
         name={name}
         {...register(id)}
         onInput={(e) => {

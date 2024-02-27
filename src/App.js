@@ -7,7 +7,7 @@ import {
 }
     from 'react-router-dom'
 import Home from './pages'
-import Contact from './pages/contact'
+import FormularioVehicular from './pages/Calculator/FormularioVehicular/FormularioVehicular'
 import FormularioHogar from './pages/Calculator/FormularioHogar/FormularioHogar'
 import FormularioVida from './pages/Calculator/FormulatrioVida/FormularioVida'
 import FormularioSalud from './pages/Calculator/FormularioSalud/FormularioSalud'
@@ -30,7 +30,7 @@ function App() {
             <Route path='/seguro-hogar' element={<FormularioHogar />} />
             <Route path='/seguro-salud' element={<FormularioSalud />} />
             <Route path='/seguro-vida' element={<FormularioVida />} />
-            <Route path='/otros-seguros' element={<OtrosSeguros />} />
+            <Route path='/seguro-vehicular' element={<FormularioVehicular />} />
             <Route path='/otros-seguros' element={<OtrosSeguros />} />
             <Route path='/formulario-enviado' element={<SubmisionConfirmation/>} />
           </Routes>

@@ -17,12 +17,13 @@ const SubmisionConfirmation = () => {
             <p className=''>{insurance.key}</p>
             <p className='text-blue-800 font-bold text-3xl'>
               <span className='font-normal text-base text-neutral-800'>s/.</span>
-              {Math.round(insurance.predictedFee / 12)}
-              <span className='font-normal text-base text-neutral-800'> al mes</span>
+              {state && Math.round(insurance.predictedFee / 12)}
+              <span className='font-normal text-base text-neutral-800'>{state && insurance.type === 'vehicular' ? '' : ' al mes'}</span>
             </p>
-            {insurance.totalDependentsFee > 0 ? (
+            {insurance.totalDependentsFee > 0 && state && insurance.type !== 'vehicular' && (
               <p className='text-sm text-neutral-600'>Precio por dependientes: s/. {Math.round(insurance.totalDependentsFee / 12)}</p>
-            ) : (
+            )}
+            {insurance.totalDependentsFee === 0 && state && insurance.type !== 'vehicular' && (
               <p className='text-sm text-neutral-600'>No incluye dependientes</p>
             )}
           </div>
