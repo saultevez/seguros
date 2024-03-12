@@ -39,7 +39,7 @@ const CheckInput = ({ id, options, inputClassname, register, onChange, name, hel
       helpText={helpText}
       errorText={errorText}
     >
-      <div className={classNames(inputClassname, 'flex gap-1 items-center')}>
+      <div className={classNames(inputClassname, ' flex-col sm:flex-row flex gap-2 sm:gap-1 sm:items-center')}>
         {options.map((option, index) => (
           <div className='w-auto flex-1 flex gap-2 items-center ml-1' key={index}>
             <input

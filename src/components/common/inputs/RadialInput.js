@@ -34,7 +34,7 @@ const RadialInput = ({ id, options, inputClassname, register, control, onChange,
     >
       <div className={classNames(inputClassname, boxSelect
         ? 'flex gap-4'
-        : 'grid grid-cols-2 gap-4',)}>
+        : 'flex flex-col sm:grid sm:grid-cols-2 gap-4',)}>
         {options.map((option, index) => (
           <div
             key={index}

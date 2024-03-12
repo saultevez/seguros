@@ -4,8 +4,8 @@ import TextInput from '../../../../components/common/inputs/TextInput'
 
 const PropertyCharacteristcsFields = ({ register, errors, idPropertyType, idPropertyAge, idPropertyAdress }) => {
   return (
-    <div className='mb-2'>
-      <div className='w-full flex gap-4'>
+    <div>
+      <div className=' flex-col sm:flex-row w-full flex gap-4'>
         <div className='w-auto flex-1'>
           <p className='mb-3'>Tipo de propiedad</p>
           <SelectInput

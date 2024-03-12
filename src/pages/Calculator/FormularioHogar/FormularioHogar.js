@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import FormContainer from '../components/FormContainer'
+import FormContainerFancy from '../components/FormContainerFancy'
 import Button from '../../../components/Button'
 import { BsFillHouseFill } from "react-icons/bs"
 import MonetaryValueField from '../components/MonetaryValueField'
@@ -10,6 +10,7 @@ import TextFields from '../components/TextField'
 import PropertyCharacteristcsFields from './components/PropertyCharacteristicsFields'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from "yup"
+import Box from '../../../components/common/Box'
 
 const schema = yup.object({
   tipo_de_moneda: yup.string().required(),
@@ -58,44 +59,48 @@ const FormularioHogar = () => {
       console.error('Validation errors:', validationErrors)
     }
   }
-  const iconElement = <BsFillHouseFill style={{ color: 'rgb(37 41 119)', height:'24px', width:'24px' }}/>
+  const iconElement = <BsFillHouseFill style={{ color: 'rgb(37 41 119)', height: '24px', width: '24px' }} />
 
   return (
-    <FormContainer icon={iconElement} title={'Cotiza tu seguro de hogar'} description={'Protege tu propiedad y responsabilidad, ofreciendo seguridad financiera.'}>
-      <iframe onLoad={() => {if(submitted) {window.location='/formulario-enviado'}}} name='submisionHidden' title='submisionHidden' id='submisionHidden' className='hidden'/>
-      <form onSubmit={handleSubmit(onSubmit)} id="form-hogar" action='https://docs.google.com/forms/d/e/1FAIpQLSfDFQFZ1SycfxGZqPqj118g_RJcUSzbI1ClP2eqsckbKW5KKg/formResponse' method='post' target='submisionHidden' className=' flex-col flex align-end mt-4' >
-        <div className='pb-4 flex flex-col gap-2'>
+    <FormContainerFancy icon={iconElement} title={'Cotiza tu seguro de hogar'} description={'Protege tu propiedad y responsabilidad, ofreciendo seguridad financiera.'}>
+      <iframe onLoad={() => { if (submitted) { window.location = '/formulario-enviado' } }} name='submisionHidden' title='submisionHidden' id='submisionHidden' className='hidden' />
+      <form onSubmit={handleSubmit(onSubmit)} id="form-hogar" action='https://docs.google.com/forms/d/e/1FAIpQLSfDFQFZ1SycfxGZqPqj118g_RJcUSzbI1ClP2eqsckbKW5KKg/formResponse' method='post' target='submisionHidden' className=' flex-col flex gap-4 mt-4' >
+        <Box>
           <h3 className="font-bold mb-2">Información General</h3>
-          <div className='mb-2'>
-            <NameFields 
-              idApellidos='entry.1379726771' 
+          <div className='mb-2 flex flex-col gap-4'>
+            <NameFields
+              idApellidos='entry.1379726771'
               idNombres='entry.1469407066'
-              register={register} 
-              errors={errors} 
-            />
-            <div className='flex gap-4 items-start'>
-              <DocumentFields 
-                idDocumentNumber={'entry.941896185'}
-                idDocumentType={'entry.1591173920'} 
-                register={register} 
-                errors={errors} 
-              />
-            <TextFields
-              className={'w-full flex-1'}
               register={register}
-              errors={errors} 
-              id={'emailAddress'}
-              label={'Email'}
-              name={'emailAddress'}
+              errors={errors}
             />
+            <div className=' flex-col sm:flex-row flex gap-4 items-start'>
+              <div className='w-full flex-1'>
+                <DocumentFields
+                  idDocumentNumber={'entry.941896185'}
+                  idDocumentType={'entry.1591173920'}
+                  register={register}
+                  errors={errors}
+                /></div>
+
+              <TextFields
+                className={'w-full flex-1'}
+                register={register}
+                errors={errors}
+                id={'emailAddress'}
+                label={'Email'}
+                name={'emailAddress'}
+              />
+            </div>
           </div>
-          </div>
-          <hr className='mb-4' />
+        </Box>
+
+        <Box>
           <h3 className="font-bold mb-2">Información de la propiedad</h3>
           <div className='flex flex-col gap-4'>
             <MonetaryValueField
-              register={register} 
-              errors={errors} 
+              register={register}
+              errors={errors}
               idCurrency={'entry.956630619'}
               idCurrencyAmount={'entry.438678515'}
               id={'propiedad_valor'}
@@ -108,14 +113,14 @@ const FormularioHogar = () => {
               errors={errors}
             />
           </div>
-        </div>
-        <Button 
-          className='self-end' 
-          type="submit" 
-          children={'Cotizar'} 
-        />
+
+          <div className='w-full justify-end flex py-4'>
+            <Button type="submit" children={'Cotizar'} />
+          </div>
+        </Box>
+
       </form>
-    </FormContainer>
+    </FormContainerFancy>
   )
 }
 

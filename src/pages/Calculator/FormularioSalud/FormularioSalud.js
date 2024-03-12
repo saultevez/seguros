@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm, useFieldArray } from 'react-hook-form'
-import FormContainer from '../components/FormContainer'
+import FormContainerFancy from '../components/FormContainerFancy'
+import Box from '../../../components/common/Box'
 import Button from '../../../components/Button'
 import { MdHealthAndSafety } from "react-icons/md"
 import GeneralInfo from './components/GeneralInfo'
@@ -29,7 +30,7 @@ const schema = yup.object({
       fecha_nacimiento: yup
         .date()
     })
-  ).default([{ fecha_nacimiento: maxDate}]),
+  ).default([{ fecha_nacimiento: maxDate }]),
 }).required()
 const defaultFormData = {
   sexo: 'mujer',
@@ -67,9 +68,6 @@ const FormularioSalud = () => {
       if (data.cobertura_internacional === 'si') {
         data.seguro_gama = 'gamaSuperAlta'
       }
-      console.log('Form data:', data)
-      const price = await calculatePrice(data)
-      console.log('final',price)
       document.getElementById('form-salud').submit()
       setSubmitted(true)
     } catch (validationErrors) {
@@ -80,32 +78,34 @@ const FormularioSalud = () => {
     control,
     name: 'dependientes',
   })
-  
-  const iconElement = <MdHealthAndSafety style={{ color: 'rgb(37 41 119)', height:'24px', width:'24px' }} />
+
+  const iconElement = <MdHealthAndSafety style={{ color: 'rgb(37 41 119)', height: '24px', width: '24px' }} />
   return (
-    <FormContainer icon={iconElement} title={'Cotiza tu seguro de salud'} description={'Cubre los gastos médicos y hospitalarios, garantizando acceso a atención médica y tranquilidad económica para el asegurado.'}>
-      <iframe onLoad={() => {if(submitted) {navigate('/formulario-enviado', { state: { price: insurancePrice } })}}} name='submisionHidden' title='submisionHidden' id='submisionHidden' className='hidden' />
+    <FormContainerFancy icon={iconElement} title={'Cotiza tu seguro de salud'} description={'Cubre los gastos médicos y hospitalarios, garantizando acceso a atención médica y tranquilidad económica para el asegurado.'}>
+      <iframe onLoad={() => { if (submitted) { navigate('/formulario-enviado', { state: { price: insurancePrice } }) } }} name='submisionHidden' title='submisionHidden' id='submisionHidden' className='hidden' />
       <form
         id="form-salud"
         action="https://docs.google.com/forms/d/e/1FAIpQLSdpsvRvJj7tqcHWw0Wpi4FlBfFHy2SpQwjyTiCQfHzrYQpQhg/formResponse"
         method="post"
         target="submisionHidden"
-        className="flex-col flex align-end mt-4"
+        className="flex-col flex mt-4 gap-4"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <GeneralInfo defaultValueDate={fechaDefault} register={register} errors={errors} control={control} />
-        <hr className='mb-4' />
-        <InsuranceInfo register={register} errors={errors} control={control} />
-        <hr className='mb-2' />
-        <DependentsInfo min={maxDate} defaultValueDate={maxDate} register={register} errors={errors} control={control} fields={fields} append={append} remove={remove} />
-        <Button
-          className="self-end"
-          type='submit'
-          children='Cotizar'
-        />
+        <Box>
+          <GeneralInfo defaultValueDate={fechaDefault} register={register} errors={errors} control={control} />
+        </Box>
+        <Box>
+          <InsuranceInfo register={register} errors={errors} control={control} />
+        </Box>
+        <Box>
+          <DependentsInfo min={maxDate} defaultValueDate={maxDate} register={register} errors={errors} control={control} fields={fields} append={append} remove={remove} />
+          <div className='w-full justify-end flex py-4'>
+            <Button type="submit" children={'Cotizar'} />
+          </div>
+        </Box>
       </form>
 
-    </FormContainer >
+    </FormContainerFancy >
   )
 }
 

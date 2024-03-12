@@ -1,7 +1,8 @@
 import React, { useState, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm, useWatch } from 'react-hook-form'
-import FormContainer from '../components/FormContainer'
+import FormContainerFancy from '../components/FormContainerFancy'
+import Box from '../../../components/common/Box'
 import Button from '../../../components/Button'
 import { FaCarSide } from "react-icons/fa6"
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -80,30 +81,37 @@ const FormularioVehicular = () => {
     }, [carModel, availableModels, setValue])
 
     return (
-        <FormContainer icon={<FaCarSide style={{ color: 'rgb(37 41 119)', height:'24px', width:'24px' }} />} title={'Cotiza tu seguro vehicular'} description={'Cubre los daños a tu vehículo y a terceros en caso de accidentes, brindando seguridad financiera y cumplimiento legal en la carretera.'}>
+        <FormContainerFancy icon={<FaCarSide style={{ color: 'rgb(37 41 119)', height: '24px', width: '24px' }} />} title={'Cotiza tu seguro vehicular'} description={'Cubre los daños a tu vehículo y a terceros en caso de accidentes, brindando seguridad financiera y cumplimiento legal en la carretera.'}>
             <iframe onLoad={() => { if (submitted) { navigate('/formulario-enviado', { state: { price: insurancePrice } }) } }} name='submisionHidden' title='submisionHidden' id='submisionHidden' className='hidden' />
-            <form id="form-vehicular" action="https://docs.google.com/forms/d/e/1FAIpQLScGe_eDRlUFoigULAF22P1HP244Q9QR5e67vKaWBEX83QlBgg/formResponse" method="post" target="submisionHidden" className="flex-col flex align-end mt-4" onSubmit={handleSubmit(onSubmit)}>
-                <h3 className="font-bold mb-2">Información del general</h3>
-                <TextFields className={'w-auto flex-1'} register={register} name={'emailAddress'} errors={errors} id={'emailAddress'} label={'Email'} />
-                <hr className="mb-2 mt-8" />
-                <h3 className="font-bold mb-2">Información del Vehículo</h3>
-                <div className='flex gap-4 mb-6'>
-                    <SelectField control={'entry.1030718323'} className={'w-auto flex-1'} register={register} errors={errors} options={brands} id={'marca_carro'} label={'Marca'} />
-                    <SelectField control={'entry.1894346779'} className={'w-auto flex-1'} register={register} errors={errors} options={availableModels} id={'modelo_carro'} label={'Modelo'} placeholder={'Selecciona un modelo'} />
-                </div>
-                <div className='flex gap-4'>
-                    <div className='flex items-end relative w-full'>
-                        <TextFields className={'w-auto flex-1'} register={register} control={'entry.1702484640'} errors={errors} id={'suma_asegurar'} label={'Valor del vehículo'} />
-                        <div className='bg-slate-200 absolute rounded-r-lg right-0 p-4 h-[40px] flex items-center'>USD</div>
+            <form id="form-vehicular" action="https://docs.google.com/forms/d/e/1FAIpQLScGe_eDRlUFoigULAF22P1HP244Q9QR5e67vKaWBEX83QlBgg/formResponse" method="post" target="submisionHidden" className="flex-col flex gap-4 mt-4 " onSubmit={handleSubmit(onSubmit)}>
+                <Box>
+                    <h3 className="font-bold mb-2">Información del general</h3>
+                    <TextFields className={'w-auto flex-1'} register={register} name={'emailAddress'} errors={errors} id={'emailAddress'} label={'Email'} />
+                </Box>
+
+                <Box>
+                    <h3 className="font-bold mb-2">Información del Vehículo</h3>
+                    <div className='flex-col sm:flex-row flex gap-4 mb-6'>
+                        <SelectField control={'entry.1030718323'} className={'w-auto flex-1'} register={register} errors={errors} options={brands} id={'marca_carro'} label={'Marca'} />
+                        <SelectField control={'entry.1894346779'} className={'w-auto flex-1'} register={register} errors={errors} options={availableModels} id={'modelo_carro'} label={'Modelo'} placeholder={'Selecciona un modelo'} />
                     </div>
-                    <div className='flex items-end relative w-full'>
-                        <TextFields className={'w-auto flex-1'} register={register} control={'entry.466706583'} errors={errors} id={'edad_carro'} label={'Antiguedad del vehículo'} /> 
-                        <div className='bg-slate-200 absolute rounded-r-lg right-0 p-4 h-[40px] flex items-center'>Años</div>
+                    <div className='flex gap-4 flex-col sm:flex-row items-start'>
+                        <div className='flex items-end relative w-full'>
+                            <TextFields className={'w-auto flex-1'} register={register} control={'entry.1702484640'} errors={errors} id={'suma_asegurar'} label={'Valor del vehículo'} />
+                            <div className='bg-slate-200 absolute top-[32px] rounded-r-lg right-0 p-4 h-[40px] flex items-center'>USD</div>
+                        </div>
+                        <div className='flex items-end relative w-full'>
+                            <TextFields className={'w-auto flex-1'} register={register} control={'entry.466706583'} errors={errors} id={'edad_carro'} label={'Antiguedad del vehículo'} />
+                            <div className='bg-slate-200 absolute top-[32px] rounded-r-lg right-0 p-4 h-[40px] flex items-center'>Años</div>
+                        </div>
                     </div>
-                </div>
-                <Button className="self-end mt-4" type="submit" children="Cotizar" />
+                    <div className='w-full justify-end flex py-4'>
+                        <Button type="submit" children={'Cotizar'} />
+                    </div>
+                </Box>
+
             </form>
-        </FormContainer>
+        </FormContainerFancy>
     )
 }
 

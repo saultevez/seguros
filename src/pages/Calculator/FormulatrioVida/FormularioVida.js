@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
-import FormContainer from '../components/FormContainer'
+import FormContainerFancy from '../components/FormContainerFancy'
 import Button from '../../../components/Button'
 import { FaHeart } from "react-icons/fa6"
 import MonetaryValueField from '../components/MonetaryValueField'
@@ -15,6 +15,7 @@ import classNames from 'classnames'
 import lifeInsuranceTypeOptions from './components/lifeInsuranceTypeOptions'
 import rescueOptions from './components/rescueOptions'
 import * as yup from "yup"
+import Box from '../../../components/common/Box'
 
 const fechaDefault = '1990-01-01'
 const schema = yup.object({
@@ -40,7 +41,7 @@ const FormularioHogar = () => {
       sexo: 'mujer',
       emailAddress: '',
       seguro_vida_tipo: 'vida',
-      vida_vida_rescate:'no',
+      vida_vida_rescate: 'no',
       tipo_de_moneda: 'PEN',
       suma_asegurada: null,
       fecha_nacimiento_niño: fechaDefault,
@@ -53,7 +54,6 @@ const FormularioHogar = () => {
   const onSubmit = async (data) => {
     try {
       await schema.validate(data, { abortEarly: false })
-      console.log('Form data:', data)
       setSbmitted(true)
       document.getElementById('form-vida').submit()
     } catch (validationErrors) {
@@ -64,44 +64,45 @@ const FormularioHogar = () => {
   const seguroVidaTipo = useWatch({
     control,
     name: 'seguro_vida_tipo',
-})
-  const iconElement = <FaHeart style={{ color: 'rgb(37 41 119)', height:'24px', width:'24px' }} />
+  })
+  const iconElement = <FaHeart style={{ color: 'rgb(37 41 119)', height: '24px', width: '24px' }} />
   return (
-    <FormContainer icon={iconElement} title={'Cotiza tu seguro de vida'} description={'Proporciona protección financiera a los beneficiarios en caso de fallecimiento del asegurado, ofreciendo tranquilidad y apoyo económico en momentos difíciles.'}>
+    <FormContainerFancy icon={iconElement} title={'Cotiza tu seguro de vida'} description={'Proporciona protección financiera a los beneficiarios en caso de fallecimiento del asegurado, ofreciendo tranquilidad y apoyo económico en momentos difíciles.'}>
       <iframe onLoad={() => { if (submitted) { window.location = '/formulario-enviado' } }} name='submisionHidden' title='submisionHidden' id='submisionHidden' className='hidden' />
-      <form id="form-vida" className=' flex-col flex align-end mt-4' onSubmit={handleSubmit(onSubmit)}
+      <form id="form-vida" className=' flex-col flex gap-4 mt-4' onSubmit={handleSubmit(onSubmit)}
         action="https://docs.google.com/forms/d/e/1FAIpQLSdLqzrB8r1eFEUcd6rljsbA-a7FxiXUZobHqXKTGaQbm7bTgg/formResponse"
         method="post"
         target="submisionHidden">
-        <div className='pb-4 flex flex-col gap-2'>
-          <h3 className="font-bold mb-2">Información General</h3>
-          <div className='mb-2'>
-            <div className='flex gap-4 items-start mb-2'>
-              <BirthDateFields className={'w-auto flex-1'} label={'Fecha de nacimiento'} id={'fecha_nacimiento'} register={register} errors={errors} control={'entry.1278227690'} defaultValue={fechaDefault} />
-              <SelectField className={'w-auto flex-1'} register={register} errors={errors} control={'entry.586574650'} options={sexOptions} id={'sexo'} label={'Sexo'} />
+        <Box>
+          <h3 className="font-bold mb-4">Información General</h3>
+          <div className='flex flex-col gap-4'>
+            <div className='flex-col sm:flex-row flex gap-4 items-start'>
+              <BirthDateFields className={'w-full flex-1'} label={'Fecha de nacimiento'} id={'fecha_nacimiento'} register={register} errors={errors} control={'entry.1278227690'} defaultValue={fechaDefault} />
+              <SelectField className={'w-full flex-1'} register={register} errors={errors} control={'entry.586574650'} options={sexOptions} id={'sexo'} label={'Sexo'} />
             </div>
-            <div className='flex gap-4 items-start mb-2'>
+            <div className='flex gap-4 items-start'>
               <TextFields className={'w-auto flex-1'} register={register} name={'emailAddress'} errors={errors} id={'emailAddress'} label={'Email'} /></div>
           </div>
-          <hr className='mb-4' />
-          <h3 className="font-bold mb-2">Información del Seguro</h3>
-          <div className='mb-2'>
-            <div className='flex flex-col gap-2'>
-              <RadialFields control={'entry.1051416964'} register={register} errors={errors} id={'seguro_vida_tipo'} label={'Tipo de seguro de vida'} options={lifeInsuranceTypeOptions} />
-              <CollapsibleBox show={seguroVidaTipo === 'vida'} children={<RadialFields control={'entry.2086989069'} register={register} errors={errors} id={'vida_vida_rescate'} label={'Rescate'} options={rescueOptions} />} />
-            </div>
-            <div className={classNames('flex flex-col gap-2 items-start duration-300', seguroVidaTipo === 'vida' ? 'items-start' : 'flex-col')}>
-              <div className='flex items-start w-full gap-2'>
-                <MonetaryValueField className={'w-auto flex-1'} register={register} idCurrencyAmount={'entry.1452209296'} idCurrency={'entry.1392841856'} errors={errors} id={'suma_asegurada'} />
-                {seguroVidaTipo === 'fondo universitario' && (<BirthDateFields className={'w-auto flex-1'} label={'Fecha de nacimiento del niño'} id={'fecha_nacimiento_niño'} register={register} errors={errors} control={'entry.354817880'} defaultValue={fechaDefault} />)}
+        </Box>
+        <Box>
+          <h3 className="font-bold mb-4">Información del Seguro</h3>
+          <div className='flex flex-col gap-4'>
+            <RadialFields control={'entry.1051416964'} register={register} errors={errors} id={'seguro_vida_tipo'} label={'Tipo de seguro de vida'} options={lifeInsuranceTypeOptions} />
+            <CollapsibleBox show={seguroVidaTipo === 'vida'} children={<RadialFields control={'entry.2086989069'} register={register} errors={errors} id={'vida_vida_rescate'} label={'Rescate'} options={rescueOptions} />} />
+            <div className={classNames('flex flex-col gap-4 items-start duration-300', seguroVidaTipo === 'vida' ? 'items-start' : 'flex-col')}>
+              <div className='flex items-start w-full gap-4 flex-col sm:flex-row'>
+                <MonetaryValueField className={'w-full flex-1'} register={register} idCurrencyAmount={'entry.1452209296'} idCurrency={'entry.1392841856'} errors={errors} id={'suma_asegurada'} />
+                {seguroVidaTipo === 'fondo universitario' && (<BirthDateFields className={'w-full flex-1'} label={'Fecha de nacimiento del niño'} id={'fecha_nacimiento_niño'} register={register} errors={errors} control={'entry.354817880'} defaultValue={fechaDefault} />)}
               </div>
               <TextFields className={'w-full'} register={register} control={'entry.1382599764'} errors={errors} id={'años_asegurar'} label={seguroVidaTipo === 'vida' ? 'Años a asegurar' : 'Años a asegurar (en función a la edad del niño)'} />
             </div>
           </div>
-        </div>
-        <Button className='self-end' type="submit" children={'Cotizar'} />
+          <div className='w-full justify-end flex py-4'>
+            <Button type="submit" children={'Cotizar'} />
+          </div>
+        </Box>
       </form>
-    </FormContainer>
+    </FormContainerFancy>
   )
 }
 

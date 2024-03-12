@@ -1,5 +1,4 @@
 import React from "react"
-import TotalContainer from "./TotalContainer"
 
 const FormContainer = ({ title, description, total, children, icon }) => {
 
@@ -14,12 +13,6 @@ const FormContainer = ({ title, description, total, children, icon }) => {
           </div>
         </div>
         <hr className="mb-2" />
-        {total && (<div> <TotalContainer
-          agePrice={total}
-          sexPrice={total}
-          nicotinePrice={total}
-        />
-          <hr className="my-2" /></div>)}
       </div>
       {children}
     </div>
