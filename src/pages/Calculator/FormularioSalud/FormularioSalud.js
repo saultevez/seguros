@@ -68,6 +68,7 @@ const FormularioSalud = () => {
       if (data.cobertura_internacional === 'si') {
         data.seguro_gama = 'gamaSuperAlta'
       }
+      const price = await calculatePrice(data)
       document.getElementById('form-salud').submit()
       setSubmitted(true)
     } catch (validationErrors) {
