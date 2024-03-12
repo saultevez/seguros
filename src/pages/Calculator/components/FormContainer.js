@@ -12,9 +12,9 @@ const FormContainer = ({ title, description, total, children, icon }) => {
             <p className="mb-4 text-slate-600">{description ? description : 'Descripción del item'}</p>
           </div>
         </div>
-        <hr className="mb-2" />
+        {children}
       </div>
-      {children}
+      
     </div>
   )
 }

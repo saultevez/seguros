@@ -1,6 +1,6 @@
 import React from 'react'
 import FormularioAccidentes from './components/FormularioAccidentes/FormularioAccidentes'
-import FormularioVehicular from './components/FormularioVehicular/FormularioVehicular'
+import FormularioCar from './components/FormularioVehicular/FormularioCAR'
 const OtrosSeguros = () => {
     return (
         <div className='pb-4 flex flex-col gap-2'>
@@ -9,7 +9,7 @@ const OtrosSeguros = () => {
           <FormularioAccidentes/>
           </div>  
           <div className='mb-2'>  
-          <FormularioVehicular/>
+          <FormularioCar/>
           </div>
         </div>
         )
