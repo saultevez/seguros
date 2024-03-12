@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import FormContainer from '../components/FormContainer'
 import Button from '../../../components/Button'
-import { SlHome } from "react-icons/sl"
+import { BsFillHouseFill } from "react-icons/bs"
 import MonetaryValueField from '../components/MonetaryValueField'
 import DocumentFields from './components/DocumentField'
 import NameFields from './components/NameFields'
@@ -58,10 +58,10 @@ const FormularioHogar = () => {
       console.error('Validation errors:', validationErrors)
     }
   }
-  const iconElement = <SlHome color='white' />
+  const iconElement = <BsFillHouseFill style={{ color: 'rgb(37 41 119)', height:'24px', width:'24px' }}/>
 
   return (
-    <FormContainer icon={iconElement} title={'Cotiza tu seguro de hogar'}>
+    <FormContainer icon={iconElement} title={'Cotiza tu seguro de hogar'} description={'Protege tu propiedad y responsabilidad, ofreciendo seguridad financiera.'}>
       <iframe onLoad={() => {if(submitted) {window.location='/formulario-enviado'}}} name='submisionHidden' title='submisionHidden' id='submisionHidden' className='hidden'/>
       <form onSubmit={handleSubmit(onSubmit)} id="form-hogar" action='https://docs.google.com/forms/d/e/1FAIpQLSfDFQFZ1SycfxGZqPqj118g_RJcUSzbI1ClP2eqsckbKW5KKg/formResponse' method='post' target='submisionHidden' className=' flex-col flex align-end mt-4' >
         <div className='pb-4 flex flex-col gap-2'>
@@ -90,8 +90,9 @@ const FormularioHogar = () => {
             />
           </div>
           </div>
-          <h3 className="font-bold mb-2">Información Propiedad</h3>
-          <div >
+          <hr className='mb-4' />
+          <h3 className="font-bold mb-2">Información de la propiedad</h3>
+          <div className='flex flex-col gap-4'>
             <MonetaryValueField
               register={register} 
               errors={errors} 

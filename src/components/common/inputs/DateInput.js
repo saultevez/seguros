@@ -3,8 +3,7 @@ import PropTypes from 'prop-types'
 import InputLayout from './InputLayout'
 import { twMerge } from 'tailwind-merge'
 
-const DateInput = ({ id, inputClassname, placeholder, onChange, register, name, helpText, errorText, label, className, control, defaultValue }) => {
-  const min = '1920-01-01'
+const DateInput = ({ id, inputClassname, placeholder, onChange, min, register, name, helpText, errorText, label, className, control, defaultValue, max }) => {
   const inputClasses = twMerge(
     'duration-300 hover:bg-blue-100 focus:bg-blue-100 bg-slate-100 h-[40px] rounded-lg px-2 border-transparent',
     inputClassname
@@ -23,6 +22,7 @@ const DateInput = ({ id, inputClassname, placeholder, onChange, register, name, 
         className={inputClasses}
         type="date"
         min={min}
+        max={max}
         id={id}
         placeholder={placeholder}
         onInput={(e) => {

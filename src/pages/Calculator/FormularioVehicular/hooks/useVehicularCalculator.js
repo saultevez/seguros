@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import vehiculos from '../components/vehiculos'
 import tasas from '../components/tasas'
 
@@ -19,7 +19,7 @@ const useVehicularCalculator = () => {
         })
 
         if (!currentTier) {
-            console.error('Tier not found for the selected car brand and model')
+            console.error('No se encontró tarifa para el vehículo seleccionado.')
             return null
         }
 
@@ -27,11 +27,9 @@ const useVehicularCalculator = () => {
             Object.entries(tiers).forEach(([tier, rates]) => {
                 if (tier === currentTier) {
                     const insuranceRate = rates[edad_carro]
-                    console.log(`${insuranceCompany} - Tier: ${tier}, Insurance Rate: ${insuranceRate}`)
-
                     const result = {
                         key: insuranceCompany,
-                        predictedFee: (insuranceRate / 1000) * suma_asegurar * 1.2154,
+                        predictedFee: (insuranceRate / 100) * suma_asegurar * 1.2154,
                         type: 'vehicular'
                     }
 

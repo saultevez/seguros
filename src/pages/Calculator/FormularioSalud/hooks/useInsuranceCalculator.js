@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import seguros from '../components/seguros2'
+import seguros from '../components/seguros'
 
 const useInsuranceCalculator = () => {
   const currentYear = new Date().getFullYear()
 
   const calculateInsurance = (formData) => {
-    const { compañias, seguro_gama, fecha_nacimiento_titular, dependientes } = formData
+    const { compañias, seguro_gama, fecha_nacimiento_titular, dependientes, incluye_dependientes, descuento } = formData
     const dependientesAges = dependientes.map((dependiente) => {
       const birthdateD = new Date(dependiente.fecha_nacimiento)
       return currentYear - birthdateD.getFullYear()
@@ -28,7 +28,7 @@ const useInsuranceCalculator = () => {
         let titularFee = 0
         let minDependentFee = 0
 
-        if (dependientesAges && Dependientes) {
+        if (dependientesAges && Dependientes && incluye_dependientes === 'si') {
           dependientesAges.forEach((dependienteAge) => {
             let foundFees = []
 
@@ -58,8 +58,13 @@ const useInsuranceCalculator = () => {
           titularFee = parseInt(age) > maxAge ? maxFee : Titulares[age] || 0
         }
         
+        let predictedFee = totalDependentsFee + titularFee
 
-        const predictedFee = totalDependentsFee + titularFee
+        if (descuento === 'no') {
+          predictedFee *= 0.8
+        } else if (descuento === 'ahora-no') {
+          predictedFee *= 0.9
+        }
 
         console.log('Insurance:', key)
         console.log('Predicted Fee:', predictedFee)

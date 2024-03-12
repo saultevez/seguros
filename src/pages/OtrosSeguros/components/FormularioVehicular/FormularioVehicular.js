@@ -8,7 +8,7 @@ const FormularioVehicular = () => {
   const handleSubmit = (data) => {
     console.log(data)
   }
-  const iconElement = <SlHeart color='white' />
+  const iconElement = <SlHeart style={{ color: 'rgb(37 41 119)', height:'24px', width:'24px' }} />
 
   return (
     <FormContainer icon={iconElement} title={'Cotiza tu seguro de accidentes personales'}>

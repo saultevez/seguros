@@ -8,8 +8,7 @@ import { AiOutlinePlus } from "react-icons/ai"
 import dependantsOptions from './dependantsOptions'
 import RadialFields from '../../components/RadialFields'
 
-const fechaDefault = '1990-01-01'
-const DependentsInfo = ({ register, errors, control, fields, append, remove, defaultValueDate }) => {
+const DependentsInfo = ({ register, errors, control, fields, append, remove, defaultValueDate, min }) => {
     const controls = [
         'entry.1086872286',
         'entry.1792008461',
@@ -48,6 +47,7 @@ const DependentsInfo = ({ register, errors, control, fields, append, remove, def
                                     inputClassname={'rounded-e-none border-slate-200 border border-e-0'}
                                     register={register}
                                     errors={errors}
+                                    min={min}
                                     id={`dependientes[${index}].fecha_nacimiento`}
                                     control={controls[index]}
                                     defaultValue={seguroDependientes === 'si' ? defaultValueDate : ''}
@@ -74,7 +74,7 @@ const DependentsInfo = ({ register, errors, control, fields, append, remove, def
                         <Button
                             type="button"
                             className={'bg-transparent border border-blue-500 text-blue-800 hover:bg-blue-100'}
-                            onClick={() => append({ fecha_nacimiento: fechaDefault })}
+                            onClick={() => append({ fecha_nacimiento: min })}
                             children={<p className='flex gap-2 items-center justify-center'>Agregar dependiente<AiOutlinePlus /></p> }
                         />
                     )}

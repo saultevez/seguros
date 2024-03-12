@@ -20,12 +20,12 @@ const InsuranceInfo = ({ register, errors, control, defaultValue }) => {
 
     return (
         <div className="mb-2 flex flex-col gap-4">
-            <h3 className="font-bold mb-2">Información Seguro</h3>
+            <h3 className="font-bold mb-2">Información del seguro</h3>
             <div className='mb-4'>
                 <RadialFields
                     control='entry.906748024'
                     register={register}
-                    label={'¿Tienes actualmente seguro de Salud o Eps?'}
+                    label={'¿Tienes actualmente seguro de Salud o EPS?'}
                     errors={errors}
                     id={'descuento'}
                     options={discountOptions}

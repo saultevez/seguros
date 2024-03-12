@@ -80,8 +80,8 @@ CheckInput.propTypes = {
     })
   ).isRequired,
   register: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func,
+  name: PropTypes.string,
   helpText: PropTypes.string,
   errorText: PropTypes.string,
   label: PropTypes.string,

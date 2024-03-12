@@ -7,7 +7,7 @@ const SubmisionConfirmation = () => {
   const price = state && state.price
 
   return (
-    <div className='flex flex-col gap-2 p-4 border-neutral-300 m-12 border rounded-xl text-center'>
+    <div className='flex flex-col gap-2 p-4 mx-auto bg-white shadow max-w-[600px] m-12 border rounded-xl text-center'>
       <h1 className='text-3xl font-bold'>¡Gracias!</h1>
       <p className='text-neutral-600'>
         {price ? 'De acuerdo a tus respuestas, tus seguros y precios estimados serían:' : 'Pronto estaremos en contacto'}</p>
@@ -16,9 +16,9 @@ const SubmisionConfirmation = () => {
           <div key={insuranceName} className='bg-blue-100/50 rounded flex flex-col gap-1 p-4 text-left'>
             <p className=''>{insurance.key}</p>
             <p className='text-blue-800 font-bold text-3xl'>
-              <span className='font-normal text-base text-neutral-800'>s/.</span>
-              {state && Math.round(insurance.predictedFee / 12)}
-              <span className='font-normal text-base text-neutral-800'>{state && insurance.type === 'vehicular' ? '' : ' al mes'}</span>
+              <span className='font-normal text-base text-neutral-800'>{state && insurance.type !== 'vehicular' ? ' S/.' : ''}</span>
+              {state && state && Math.round(insurance.predictedFee / (state && insurance.type !== 'vehicular' ? 12 : 1))}
+              <span className='font-normal text-base text-neutral-800'>{state && insurance.type === 'vehicular' ? ' USD' : ' al mes'}</span>
             </p>
             {insurance.totalDependentsFee > 0 && state && insurance.type !== 'vehicular' && (
               <p className='text-sm text-neutral-600'>Precio por dependientes: s/. {Math.round(insurance.totalDependentsFee / 12)}</p>

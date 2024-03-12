@@ -6,6 +6,9 @@ import routes from "../../routes"
 
 function Navbar() {
   const location = useLocation()
+
+  const filteredRoutes = routes.filter(route => route.path !== '/')
+
   return (
     <nav className="w-full px-3">
       <ul className="flex justify-center w-full p-4 items-center gap-4">
@@ -14,8 +17,7 @@ function Navbar() {
             <img className="logo" alt="logo" src={logo} />
           </Link>
         </li>
-        {routes.map((route) => (
-
+        {filteredRoutes.map((route) => (
           <NavItem
             key={route.path}
             to={route.path}

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useForm, useFieldArray } from 'react-hook-form'
 import FormContainer from '../components/FormContainer'
 import Button from '../../../components/Button'
-import { SlEmotsmile } from "react-icons/sl"
+import { MdHealthAndSafety } from "react-icons/md"
 import GeneralInfo from './components/GeneralInfo'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from "yup"
@@ -11,6 +11,7 @@ import InsuranceInfo from './components/InsuranceInfo'
 import DependentsInfo from './components/DependantsInfo'
 import useInsuranceCalculator from './hooks/useInsuranceCalculator'
 
+const maxDate = new Date(new Date().setFullYear(new Date().getFullYear() - 26)).toISOString().slice(0, 10)
 const fechaDefault = '1990-01-01'
 const schema = yup.object({
   sexo: yup.string().required(),
@@ -21,13 +22,14 @@ const schema = yup.object({
   emailAddress: yup.string().email('Por favor introduzca un email válido').required('Email es un campo obligatorio'),
   tipo_seguro: yup.string().required(),
   cobertura_internacional: yup.string().required('Por favor seleccione una opción'),
-  compañias: yup.array(),
+  compañias: yup.array().required('Por favor seleccione una opción'),
   incluye_dependientes: yup.string(),
   dependientes: yup.array().of(
     yup.object().shape({
-      fecha_nacimiento: yup.date().required('Fecha de nacimiento es un campo obligatorio')
+      fecha_nacimiento: yup
+        .date()
     })
-  ).default([{ fecha_nacimiento: fechaDefault }]),
+  ).default([{ fecha_nacimiento: maxDate}]),
 }).required()
 const defaultFormData = {
   sexo: 'mujer',
@@ -40,7 +42,7 @@ const defaultFormData = {
   incluye_dependientes: 'no',
   cobertura_internacional: 'no',
   compañias: null,
-  dependientes: [{ fecha_nacimiento: fechaDefault }],
+  dependientes: [{ fecha_nacimiento: maxDate }],
 }
 const FormularioSalud = () => {
   const navigate = useNavigate()
@@ -79,9 +81,9 @@ const FormularioSalud = () => {
     name: 'dependientes',
   })
   
-  const iconElement = <SlEmotsmile color='white' />
+  const iconElement = <MdHealthAndSafety style={{ color: 'rgb(37 41 119)', height:'24px', width:'24px' }} />
   return (
-    <FormContainer icon={iconElement} title={'Cotiza tu seguro de salud'}>
+    <FormContainer icon={iconElement} title={'Cotiza tu seguro de salud'} description={'Cubre los gastos médicos y hospitalarios, garantizando acceso a atención médica y tranquilidad económica para el asegurado.'}>
       <iframe onLoad={() => {if(submitted) {navigate('/formulario-enviado', { state: { price: insurancePrice } })}}} name='submisionHidden' title='submisionHidden' id='submisionHidden' className='hidden' />
       <form
         id="form-salud"
@@ -92,10 +94,10 @@ const FormularioSalud = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <GeneralInfo defaultValueDate={fechaDefault} register={register} errors={errors} control={control} />
-        <hr className='mb-2' />
+        <hr className='mb-4' />
         <InsuranceInfo register={register} errors={errors} control={control} />
         <hr className='mb-2' />
-        <DependentsInfo defaultValueDate={fechaDefault} register={register} errors={errors} control={control} fields={fields} append={append} remove={remove} />
+        <DependentsInfo min={maxDate} defaultValueDate={maxDate} register={register} errors={errors} control={control} fields={fields} append={append} remove={remove} />
         <Button
           className="self-end"
           type='submit'

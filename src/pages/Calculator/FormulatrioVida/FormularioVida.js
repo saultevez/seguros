@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import FormContainer from '../components/FormContainer'
 import Button from '../../../components/Button'
-import { SlHome } from "react-icons/sl"
+import { FaHeart } from "react-icons/fa6"
 import MonetaryValueField from '../components/MonetaryValueField'
 import BirthDateFields from '../components/BirthDateFields'
 import TextFields from '../components/TextField'
@@ -20,7 +20,6 @@ const fechaDefault = '1990-01-01'
 const schema = yup.object({
   fecha_nacimiento: yup.date().required(),
   sexo: yup.string().required(),
-  telefono: yup.number('El valor tiene que ser un número').typeError('El valor tiene que ser un número').positive('Número inválido').nullable(true).notRequired().transform((value) => !!value ? value : null),
   emailAddress: yup.string().email(),
   seguro_vida_tipo: yup.string(),
   vida_vida_rescate: yup.string(),
@@ -39,7 +38,6 @@ const FormularioHogar = () => {
     defaultValues: {
       fecha_nacimiento: fechaDefault,
       sexo: 'mujer',
-      telefono: null,
       emailAddress: '',
       seguro_vida_tipo: 'vida',
       vida_vida_rescate:'no',
@@ -67,9 +65,9 @@ const FormularioHogar = () => {
     control,
     name: 'seguro_vida_tipo',
 })
-  const iconElement = <SlHome color='white' />
+  const iconElement = <FaHeart style={{ color: 'rgb(37 41 119)', height:'24px', width:'24px' }} />
   return (
-    <FormContainer icon={iconElement} title={'Cotiza tu seguro de vida'}>
+    <FormContainer icon={iconElement} title={'Cotiza tu seguro de vida'} description={'Proporciona protección financiera a los beneficiarios en caso de fallecimiento del asegurado, ofreciendo tranquilidad y apoyo económico en momentos difíciles.'}>
       <iframe onLoad={() => { if (submitted) { window.location = '/formulario-enviado' } }} name='submisionHidden' title='submisionHidden' id='submisionHidden' className='hidden' />
       <form id="form-vida" className=' flex-col flex align-end mt-4' onSubmit={handleSubmit(onSubmit)}
         action="https://docs.google.com/forms/d/e/1FAIpQLSdLqzrB8r1eFEUcd6rljsbA-a7FxiXUZobHqXKTGaQbm7bTgg/formResponse"
@@ -83,12 +81,12 @@ const FormularioHogar = () => {
               <SelectField className={'w-auto flex-1'} register={register} errors={errors} control={'entry.586574650'} options={sexOptions} id={'sexo'} label={'Sexo'} />
             </div>
             <div className='flex gap-4 items-start mb-2'>
-              <TextFields className={'w-auto flex-1'} register={register} control={'entry.2018563547'} errors={errors} id={'telefono'} label={'Telefono'} />
               <TextFields className={'w-auto flex-1'} register={register} name={'emailAddress'} errors={errors} id={'emailAddress'} label={'Email'} /></div>
           </div>
-          <h3 className="font-bold mb-2">Información Seguro</h3>
+          <hr className='mb-4' />
+          <h3 className="font-bold mb-2">Información del Seguro</h3>
           <div className='mb-2'>
-            <div className='flex flex-col gap-2 mb-4'>
+            <div className='flex flex-col gap-2'>
               <RadialFields control={'entry.1051416964'} register={register} errors={errors} id={'seguro_vida_tipo'} label={'Tipo de seguro de vida'} options={lifeInsuranceTypeOptions} />
               <CollapsibleBox show={seguroVidaTipo === 'vida'} children={<RadialFields control={'entry.2086989069'} register={register} errors={errors} id={'vida_vida_rescate'} label={'Rescate'} options={rescueOptions} />} />
             </div>

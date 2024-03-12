@@ -17,7 +17,7 @@ const RadialInput = ({ id, options, inputClassname, register, control, onChange,
       })
     }
   }
-  
+
   useEffect(() => {
     onChange && onChange(selected)
   }, [selected, onChange])
@@ -32,14 +32,16 @@ const RadialInput = ({ id, options, inputClassname, register, control, onChange,
       helpText={helpText}
       errorText={errorText}
     >
-      <div className={classNames(inputClassname, 'flex gap-4')}>
+      <div className={classNames(inputClassname, boxSelect
+        ? 'flex gap-4'
+        : 'grid grid-cols-2 gap-4',)}>
         {options.map((option, index) => (
           <div
             key={index}
             className={classNames(
               boxSelect
                 ? 'border-2 cursor-pointer duration-300 p-4 rounded-lg  w-full text-left hover:bg-blue-200 flex gap-2 items-center ml-1'
-                : 'w-auto flex-1 flex gap-2 items-center ml-1 text-left',
+                : 'w-auto flex gap-2 items-center ml-1 text-left',
               {
                 'bg-blue-200/50 border-blue-500 active:shadow-lg': boxSelect && option.id === selected,
                 'bg-slate-100/50 border-transparent': boxSelect && option.id !== selected,
@@ -60,15 +62,15 @@ const RadialInput = ({ id, options, inputClassname, register, control, onChange,
         ))}
         {control && (
           options.map((option, index) => (
-              <input
-                key={index}
-                className='hidden'
-                type='radio'
-                id={control}
-                value={option.value}
-                name={control}
-                defaultChecked={defaultValue===option.value}
-              />
+            <input
+              key={index}
+              className='hidden'
+              type='radio'
+              id={control}
+              value={option.value}
+              name={control}
+              defaultChecked={defaultValue === option.value}
+            />
           ))
         )}
       </div>
@@ -81,7 +83,7 @@ RadialInput.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
+      label: PropTypes.any.isRequired,
       value: PropTypes.string.isRequired,
     })
   ).isRequired,
@@ -90,7 +92,7 @@ RadialInput.propTypes = {
   name: PropTypes.string,
   helpText: PropTypes.string,
   errorText: PropTypes.string,
-  label: PropTypes.string,
+  label: PropTypes.any,
   className: PropTypes.string,
 }
 
