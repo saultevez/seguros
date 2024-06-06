@@ -23,8 +23,12 @@ const vehiculos = {
       "Bajo Riesgo 1": ["Otro"],
       "Bajo Riesgo 2": ["Xtrail"]
     },
+    "Tucson": {
+      "Bajo Riesgo 1": ["Otro"]
+    },
     "Subaru": {
       "Alto Riesgo": ["Impreza"],
+      "Mediano Riesgo": ["XV"],
       "Bajo Riesgo 1": ["Otro"]
     },
     "Suzuki": {
