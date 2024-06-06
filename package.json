@@ -23,7 +23,6 @@
     "simple-line-icons": "^2.5.5",
     "styled-components": "^5.3.10",
     "tailwind-merge": "^2.2.1",
-    "tailwindcss-merge": "^0.0.2",
     "yup": "^1.3.3"
   },
   "scripts": {
