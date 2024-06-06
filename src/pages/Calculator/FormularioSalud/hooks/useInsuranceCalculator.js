@@ -13,6 +13,7 @@ const useInsuranceCalculator = () => {
 
     const birthdate = new Date(fecha_nacimiento_titular)
     const age = currentYear - birthdate.getFullYear()
+    console.log('age', age)
 
     const insurances = findInsurances(compañias, seguro_gama, seguros)
     if (!insurances || insurances.length === 0) {

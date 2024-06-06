@@ -4,13 +4,14 @@ import { BsFillHouseFill } from "react-icons/bs"
 import { MdHealthAndSafety } from "react-icons/md"
 import { FaCarSide } from "react-icons/fa6"
 import { FaHeart } from "react-icons/fa6"
+import { FaHandSparkles } from "react-icons/fa"
 
 const iconMapping = {
   'Seguro de Salud': <MdHealthAndSafety style={{ height:'20px', width:'20px' }} />,
   'Seguro de Hogar': <BsFillHouseFill style={{ height:'20px', width:'20px' }} />,
   'Seguro de Vida': <FaHeart style={{ height:'20px', width:'20px' }} />,
   'Seguro Vehicular': <FaCarSide style={{ height:'20px', width:'20px' }} />,
-  'Otros Seguros': null
+  'Otros Seguros': <FaHandSparkles style={{ height:'20px', width:'20px' }} />,
 }
 
 const descriptionMapping = {

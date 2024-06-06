@@ -29,15 +29,8 @@ const schema = yup.object({
   fecha_nacimiento_niño: yup.date(),
   años_asegurar: yup.number()
 }).required()
-const FormularioHogar = () => {
-  const {
-    handleSubmit,
-    register,
-    control,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      fecha_nacimiento: fechaDefault,
+const defaultFormData = {
+  fecha_nacimiento: fechaDefault,
       sexo: 'mujer',
       emailAddress: '',
       seguro_vida_tipo: 'vida',
@@ -46,7 +39,15 @@ const FormularioHogar = () => {
       suma_asegurada: null,
       fecha_nacimiento_niño: fechaDefault,
       años_asegurar: null
-    },
+}
+const FormularioHogar = () => {
+  const {
+    handleSubmit,
+    register,
+    control,
+    formState: { errors },
+  } = useForm({
+    defaultValues: defaultFormData,
     resolver: yupResolver(schema),
   })
   const [submitted, setSbmitted] = useState(false)
