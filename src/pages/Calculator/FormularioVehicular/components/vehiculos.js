@@ -45,6 +45,15 @@ const vehiculos = {
     "Chevrolet": {
       "Mediano Riesgo": ["Otro"]
     },
+    "Mercedes": {
+      "Bajo Riesgo 1": ["Otro"]
+    },
+    "BMW": {
+      "Bajo Riesgo 1": ["Otro"]
+    },
+    "Audi": {
+      "Bajo Riesgo 1": ["Otro"]
+    },
     "Ford": {
       "Mediano Riesgo": ["Fiesta"],
       "Bajo Riesgo 1": ["Otro"],
