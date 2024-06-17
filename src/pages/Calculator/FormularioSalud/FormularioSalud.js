@@ -69,6 +69,7 @@ const FormularioSalud = () => {
         data.seguro_gama = 'gamaSuperAlta'
       }
       const price = await calculatePrice(data)
+      console.log(price)
       document.getElementById('form-salud').submit()
       setSubmitted(true)
     } catch (validationErrors) {

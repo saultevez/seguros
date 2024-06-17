@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import seguros from '../components/seguros';
+import seguros from '../components/seguros_salud/seguros';
 import descuentos from '../components/descuentos';
 
 const useInsuranceCalculator = () => {
@@ -14,7 +14,6 @@ const useInsuranceCalculator = () => {
 
     const birthdate = new Date(fecha_nacimiento_titular);
     const age = currentYear - birthdate.getFullYear();
-    console.log('age', age);
 
     const insurances = findInsurances(compañias, seguro_gama, seguros);
     if (!insurances || insurances.length === 0) {
@@ -23,7 +22,6 @@ const useInsuranceCalculator = () => {
     }
 
     const result = [];
-    console.log(descuento)
     insurances.forEach((insurance) => {
       Object.entries(insurance).forEach(([key, value]) => {
         const { Titulares, Dependientes } = value;
@@ -71,18 +69,21 @@ const useInsuranceCalculator = () => {
         }
 
         let predictedFee = totalDependentsFee + titularFee;
+        let appliedDiscount = 0;
+        console.log(descuento)
+         // Aplica el descuento después de calcular el total
+         Object.entries(descuentos).forEach(([descuentoInfo, { seguroAnterior, value }]) => {
+          if ((key.includes(descuentoInfo) && seguroAnterior.includes(descuento))) {
+          appliedDiscount = value;
+          }
+        });
 
-        // Aplica el descuento después de calcular el total
-        if (descuento === 'no' || descuento === 'ahora-no') {
-          const companyDiscount = descuentos[key] || 0;
-          const discountFactor = 1 - (companyDiscount / 100);
+        if (appliedDiscount > 0) {
+          const discountFactor = 1 - (appliedDiscount / 100);
           predictedFee *= discountFactor;
         }
 
-        console.log('Insurance:', key);
-        console.log('Predicted Fee:', predictedFee);
-
-        result.push({ key, type: 'salud', predictedFee, totalDependentsFee });
+        result.push({ key, type: 'salud', predictedFee, totalDependentsFee, appliedDiscount });
       });
     });
 

@@ -1,5 +1,11 @@
 const descuentos = {
-    "Rimac": 14,
-    "Pacifico": 20,
+    "Rímac": {
+      seguroAnterior: ['no'],
+      value: 14,
+    },
+    "Pacífico": {
+      seguroAnterior: ['no', 'no-ahora'],
+      value: 20,
+    },
   }
 export default descuentos
