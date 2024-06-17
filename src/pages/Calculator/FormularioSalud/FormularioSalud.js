@@ -1,19 +1,19 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useForm, useFieldArray } from 'react-hook-form'
-import FormContainerFancy from '../components/FormContainerFancy'
-import Box from '../../../components/common/Box'
-import Button from '../../../components/Button'
-import { MdHealthAndSafety } from "react-icons/md"
-import GeneralInfo from './components/GeneralInfo'
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from "yup"
-import InsuranceInfo from './components/InsuranceInfo'
-import DependentsInfo from './components/DependantsInfo'
-import useInsuranceCalculator from './hooks/useInsuranceCalculator'
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useForm, useFieldArray, useWatch } from 'react-hook-form';
+import FormContainerFancy from '../components/FormContainerFancy';
+import Box from '../../../components/common/Box';
+import Button from '../../../components/Button';
+import { MdHealthAndSafety } from "react-icons/md";
+import GeneralInfo from './components/GeneralInfo';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
+import InsuranceInfo from './components/InsuranceInfo';
+import DependentsInfo from './components/DependantsInfo';
+import useInsuranceCalculator from './hooks/useInsuranceCalculator';
 
-const maxDate = new Date(new Date().setFullYear(new Date().getFullYear() - 26)).toISOString().slice(0, 10)
-const fechaDefault = '1990-01-01'
+const maxDate = new Date(new Date().setFullYear(new Date().getFullYear() - 26)).toISOString().slice(0, 10);
+const fechaDefault = '1990-01-01';
 const schema = yup.object({
   sexo: yup.string().required(),
   descuento: yup.string().required('Por favor seleccione una opción'),
@@ -27,11 +27,11 @@ const schema = yup.object({
   incluye_dependientes: yup.string(),
   dependientes: yup.array().of(
     yup.object().shape({
-      fecha_nacimiento: yup
-        .date()
+      fecha_nacimiento: yup.date()
     })
   ).default([{ fecha_nacimiento: maxDate }]),
-}).required()
+}).required();
+
 const defaultFormData = {
   sexo: 'mujer',
   descuento: 'no',
@@ -44,9 +44,10 @@ const defaultFormData = {
   cobertura_internacional: 'no',
   compañias: null,
   dependientes: [{ fecha_nacimiento: maxDate }],
-}
+};
+
 const FormularioSalud = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const {
     handleSubmit,
     register,
@@ -55,36 +56,59 @@ const FormularioSalud = () => {
   } = useForm({
     defaultValues: defaultFormData,
     resolver: yupResolver(schema),
-  })
-  const { insurancePrice, calculatePrice } = useInsuranceCalculator()
-  const [submitted, setSubmitted] = useState(false)
+  });
 
+  const { insurancePrice, calculatePrice } = useInsuranceCalculator();
+  const [submitted, setSubmitted] = useState(false);
+  const [showDisclaimer, setShowDisclaimer] = useState(false);
 
   const onSubmit = async (data, e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
-      await schema.validate(data, { abortEarly: false })
+      await schema.validate(data, { abortEarly: false });
       if (data.cobertura_internacional === 'si') {
-        data.seguro_gama = 'gamaSuperAlta'
+        data.seguro_gama = 'gamaSuperAlta';
       }
-      const price = await calculatePrice(data)
-      console.log(price)
-      document.getElementById('form-salud').submit()
-      setSubmitted(true)
+      const price = await calculatePrice(data);
+      console.log(price);
+      document.getElementById('form-salud').submit();
+      setSubmitted(true);
     } catch (validationErrors) {
-      console.error('Validation errors:', validationErrors)
+      console.error('Validation errors:', validationErrors);
     }
-  }
+  };
+
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'dependientes',
-  })
+  });
 
-  const iconElement = <MdHealthAndSafety style={{ color: 'rgb(37 41 119)', height: '24px', width: '24px' }} />
+  const fechaNacimientoTitular = useWatch({
+    control,
+    name: 'fecha_nacimiento_titular',
+  });
+
+  const iconElement = <MdHealthAndSafety style={{ color: 'rgb(37 41 119)', height: '24px', width: '24px' }} />;
+
+  useEffect(() => {
+    let timer;
+    if (fechaNacimientoTitular) {
+      timer = setTimeout(() => {
+        if (new Date().getFullYear() - new Date(fechaNacimientoTitular).getFullYear() >= 65) {
+          setShowDisclaimer(true);
+        } else {
+          setShowDisclaimer(false);
+        }
+      }, 500); // Delay de 500ms para mostrar el disclaimer
+    }
+
+    return () => clearTimeout(timer)
+  }, [fechaNacimientoTitular]);
+
   return (
     <FormContainerFancy icon={iconElement} title={'Cotiza tu seguro de salud'} description={'Cubre los gastos médicos y hospitalarios, garantizando acceso a atención médica y tranquilidad económica para el asegurado.'}>
-      <iframe onLoad={() => { if (submitted) { navigate('/formulario-enviado', { state: { price: insurancePrice } }) } }} name='submisionHidden' title='submisionHidden' id='submisionHidden' className='hidden' />
+      <iframe onLoad={() => { if (submitted) { navigate('/formulario-enviado', { state: { price: insurancePrice, showDisclaimer } }) } }} name='submisionHidden' title='submisionHidden' id='submisionHidden' className='hidden' />
       <form
         id="form-salud"
         action="https://docs.google.com/forms/d/e/1FAIpQLSdpsvRvJj7tqcHWw0Wpi4FlBfFHy2SpQwjyTiCQfHzrYQpQhg/formResponse"
@@ -93,6 +117,9 @@ const FormularioSalud = () => {
         className="flex-col flex mt-4 gap-4"
         onSubmit={handleSubmit(onSubmit)}
       >
+        <div className={`${showDisclaimer ? 'opacity-100 transition-opacity duration-500 h-auto' : ' p-0 m-0 absolute h-0 opacity-0 pointer-events-none'} bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4`}>
+          <p className="font-bold">Los seguros para adultos mayores pueden requerir de asesoramiento específico. Por favor no dude en contactarnos por <a target='_blank' rel='noreferrer' className=' underline hover:opacity-80 transition-all duration-100' href="https://api.whatsapp.com/send?phone=51970177742">WhatsApp</a> si tiene dudas.</p>
+        </div>
         <Box>
           <GeneralInfo defaultValueDate={fechaDefault} register={register} errors={errors} control={control} />
         </Box>
@@ -106,9 +133,8 @@ const FormularioSalud = () => {
           </div>
         </Box>
       </form>
+    </FormContainerFancy>
+  );
+};
 
-    </FormContainerFancy >
-  )
-}
-
-export default FormularioSalud 
+export default FormularioSalud;

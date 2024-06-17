@@ -6,17 +6,27 @@ const SubmisionConfirmation = () => {
   const location = useLocation();
   const { state } = location;
   const price = state && state.price;
-  console.log(price)
+  const showDisclaimer = state && state.showDisclaimer;
+
+  // Función para verificar si se debe mostrar el disclaimer
+  const checkAgeDisclaimer = (price) => {
+    if (!price) return false;
+    console.log(price)
+
+    const hasAgeDisclaimer = price.some((insurance) => insurance.age >= 65);
+    return hasAgeDisclaimer;
+  };
 
   return (
     <div className='flex flex-col gap-2 p-4 mx-auto bg-white shadow max-w-[600px] m-12 border rounded-xl text-center'>
       <h1 className='text-3xl font-bold'>¡Gracias!</h1>
       <p className='text-neutral-600'>
-        {price ? 'De acuerdo a tus respuestas, tus seguros y precios estimados serían:' : 'Pronto estaremos en contacto'}</p>
+        {price ? 'De acuerdo a tus respuestas, tus seguros y precios estimados serían:' : 'Pronto estaremos en contacto'}
+      </p>
       <div className='flex-wrap flex gap-6 p-4 items-center justify-center'>
         {price && price.map((insurance) => (
-          <div 
-            key={insurance.key} 
+          <div
+            key={insurance.key}
             className={classNames(
               'relative bg-blue-100/50 rounded flex flex-col gap-1 p-4 text-left',
               { 'pt-8': insurance.appliedDiscount > 0 }
@@ -40,13 +50,19 @@ const SubmisionConfirmation = () => {
           </div>
         ))}
       </div>
+      
       {price && price.some((insurance) => insurance.appliedDiscount > 0) && (
         <p className='text-sm text-neutral-600 italic'>
           *Los descuentos pueden aumentar aún más, dependiendo de la suscripción de cada cliente.
         </p>
       )}
       {price && price.some((insurance) => insurance.key.includes('Mapfre')) && (
-              <p className='text-sm text-neutral-600 italic'>**Las primas de Mapfre podrían variar si provienen de otra compañía de seguros.</p>
+        <p className='text-sm text-neutral-600 italic'>**Las primas de Mapfre podrían variar si provienen de otra compañía de seguros.</p>
+      )}
+      {showDisclaimer && checkAgeDisclaimer(price) && (  // Verifica si se debe mostrar el disclaimer
+        <div className=" text-sm text-neutral-600">
+          <p className="font-bold">Los seguros para adultos mayores pueden requerir de asesoramiento específico. Por favor no dude en contactarnos por <a className='underline hover:opacity-80' href="https://api.whatsapp.com/send?phone=51970177742">WhatsApp</a> para saber más detalles.</p>
+        </div>
       )}
     </div>
   );

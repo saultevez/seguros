@@ -7,7 +7,7 @@ import compañias from '../../../../compañias'
 import insuranceOptions from './insuranceOptions'
 import { useWatch } from 'react-hook-form'
 
-const InsuranceInfo = ({ register, errors, control, defaultValue }) => {
+const InsuranceInfo = ({ register, errors, control, defaultValue }) => { 
     const seguroGama = useWatch({
         control,
         name: 'seguro_gama',
@@ -15,7 +15,7 @@ const InsuranceInfo = ({ register, errors, control, defaultValue }) => {
     const internacional = useWatch({
         control,
         name: 'cobertura_internacional',
-    })
+    })    
     const compañiasOptions = useMemo(() => compañias(seguroGama, internacional), [seguroGama, internacional])
 
     return (

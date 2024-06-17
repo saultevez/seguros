@@ -83,7 +83,7 @@ const useInsuranceCalculator = () => {
           predictedFee *= discountFactor;
         }
 
-        result.push({ key, type: 'salud', predictedFee, totalDependentsFee, appliedDiscount });
+        result.push({ key, type: 'salud', age:age, predictedFee, totalDependentsFee, appliedDiscount });
       });
     });
 

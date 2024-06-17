@@ -4,7 +4,7 @@ import Button from '../../../components/Button'
 import { MdLocalPolice } from "react-icons/md"
 
 const FormularioResponsabilidad = () => {
-
+ 
   const handleContactar = () => {
     window.location.href = 'https://api.whatsapp.com/send?phone=51970177742'
   }
