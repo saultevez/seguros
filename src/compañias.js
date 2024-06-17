@@ -6,21 +6,29 @@ const compañias = (seguroGama, internacional) => {
       availableCompanies = [
         { id: 'r', label: 'Rimac', value: 'rimac' },
         { id: 'p', label: 'Pacífico', value: 'pacifico' },
+        { id: 'm', label: 'Mapfre', value: 'mapfre' },
+        { id: 'l', label: 'La Positiva', value: 'laPositiva' },
+      ]
+      break
+      case 'basico':
+        availableCompanies = [
+          { id: 'r', label: 'Rimac', value: 'rimac' },
+          { id: 'p', label: 'Pacífico', value: 'pacifico' },
+          { id: 's', label: 'Sanitas', value: 'sanitas' },
+          { id: 'm', label: 'Mapfre', value: 'mapfre' },  
+        ]
+        break
+    case 'economico':
+      availableCompanies = [
+        { id: 'p', label: 'Pacífico', value: 'pacifico' },
         { id: 's', label: 'Sanitas', value: 'sanitas' },
         { id: 'l', label: 'La Positiva', value: 'laPositiva' },
       ]
       break
-    case 'economico':
-      availableCompanies = [
-        { id: 'r', label: 'Rimac', value: 'rimac' },
-        { id: 'p', label: 'Pacífico', value: 'pacifico' },
-        { id: 'm', label: 'Mapfre', value: 'mapfre' },
-      ]
-      break
     case 'superEconomico':
       availableCompanies = [
-        { id: 's', label: 'Sanitas', value: 'sanitas' },
         { id: 'p', label: 'Pacífico', value: 'pacifico' },
+        { id: 's', label: 'Sanitas', value: 'sanitas' },
       ]
       break
       case 'gamaAlta':
@@ -35,7 +43,6 @@ const compañias = (seguroGama, internacional) => {
           { id: 'p', label: 'Pacífico', value: 'pacifico' },
           { id: 'r', label: 'Rimac', value: 'rimac' },
           { id: 's', label: 'Sanitas', value: 'sanitas' },
-          { id: 'm', label: 'Mapfre', value: 'mapfre' },
           { id: 'l', label: 'La Positiva', value: 'laPositiva' },
         ]
       }
