@@ -1,7 +1,7 @@
 const descuentos = {
     "Rímac": {
       seguroAnterior: ['no'],
-      value: 14,
+      value: 17,
     },
     "Pacífico": {
       seguroAnterior: ['no', 'no-ahora'],
