@@ -12,7 +12,7 @@ const FormularioAccidentes = () => {
   const iconElement = <FaExplosion style={{ color: 'rgb(37 41 119)', height:'24px', width:'24px' }} />
 
   return (
-    <FormContainer icon={iconElement} title={'Cotiza tu seguro de accidentes personales'} description={'Cubre lesiones y fallecimiento por accidentes, ofreciendo compensación financiera.'}>
+    <FormContainer icon={iconElement} title={'Cotiza tu seguro EPS'} description={'Cubre lesiones y fallecimiento por accidentes, ofreciendo compensación financiera.'}>
       <div className=' flex-col flex align-end mt-4'>
         <Button className='self-end' onClick={handleContactar} children={'Contacto a WhatsApp'} />
       </div>
